@@ -116,6 +116,18 @@ Before writing anything:
 From the brief, settle these inputs (ask the user only if unclear):
 
 - `brand_name`, `tagline`, `italic_words` (2–4 emotional nouns)
+  - Normalize the raw `italic_words` string before use: trim each
+    entry, split on `,`, and drop empty tokens.
+  - Cap the list at 4 nouns. If more than 4 were supplied, keep the
+    first 4 and surface a one-line warning before emitting the page;
+    this preserves the rule in DESIGN.md §12 that italic emphasis
+    only carries emotional **nouns**.
+  - If a token is a verb or adjective (e.g. `designing`, `beautiful`),
+    rewrite it to its noun form (`design`, `beauty`) instead of
+    italicizing it as-is. If you cannot map it confidently, drop it
+    and warn rather than violating the noun-only rule.
+  - Strip punctuation other than the comma separators (e.g. trailing
+    periods, stray quotes) before comparing or rendering.
 - `vol_issue` (defaults `Vol. 01 / Issue Nº 01`)
 - `filed_under` (default `Design · Intelligence`)
 - `coords` (default Berlin), and an alternate language list
@@ -138,9 +150,28 @@ For each entry in `image-manifest.json`:
    manifest specifies size and quality.
 3. Write each render to `assets/<slot>.png`. Long-edge ≥1024px.
 
-If image generation is unavailable, leave the `<img>` tag in place
-with `assets/<slot>.png` as the src — the user can render later with
-the prompt pack.
+If image generation is unavailable for a given slot, do NOT leave a
+broken `<img>` reference. Inject an inline SVG placeholder sized to
+the slot's manifest aspect ratio (1:1, 3:4, or whatever
+`image-manifest.json` declares), filled with `--paper` (`#efe7d2`),
+and showing a centered 10px JetBrains Mono label such as
+`[Render pending: hero.png]` in `--ink-faint`. This preserves the
+page layout, signals the gap explicitly, and stays inside the Atelier
+Zero palette. The user can later regenerate the slot from
+`imagegen-prompts.md` and replace the placeholder. Example:
+
+```html
+<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice"
+     role="img" aria-label="Render pending: hero.png">
+  <rect width="100" height="100" fill="#efe7d2"/>
+  <text x="50" y="52" text-anchor="middle"
+        font-family="JetBrains Mono, monospace" font-size="4"
+        fill="#8b8676">[Render pending: hero.png]</text>
+</svg>
+```
+
+If image generation succeeded for the slot, write the PNG to
+`assets/<slot>.png` and reference it from `<img src>` as usual.
 
 ## 4. Compose the page
 
@@ -271,9 +302,11 @@ page** in Open Design. It pairs with:
   ("Open Design").
 
 The 16 PNGs in `assets/` ship with the skill so the example renders
-out-of-the-box. When re-keying to a new brand, regenerate at minimum
-`hero.png`, `about.png`, `capabilities.png`, `cta.png`, and
-`testimonial.png`. The 4 method tiles and 5 lab cards can be reused
-across many brands because they read as abstract collage motifs.
+out-of-the-box. When re-keying to a new brand, regenerate every slot
+flagged `rekey_on_brand_change: true` in `assets/image-manifest.json`
+— at the time of writing that is `hero.png`, `about.png`,
+`capabilities.png`, `cta.png`, `testimonial.png`, `work-1.png`, and
+`work-2.png`. The 4 method tiles and 5 lab cards can be reused across
+many brands because they read as abstract collage motifs.
 
 See `../../docs/skills-protocol.md` for the full skill protocol.

@@ -13,8 +13,11 @@ The pack has three layers:
    about, capabilities, method tiles, lab cards, work cards,
    testimonial, and CTA.
 
-Render at 1024×1024 minimum (1:1) or 1536×1024 (16:9 hero / cta).
-Save as PNG to `assets/<slot>.png`.
+Render at 1024×1024 minimum for square slots (hero / about / capabilities
+/ testimonial / cta), 816×816 for the four method tiles, and 768×1024 for
+portrait slots (lab cards, featured work). Authoritative per-slot
+dimensions and aspect ratios live in `image-manifest.json` — treat that
+file as the source of truth. Save as PNG to `assets/<slot>.png`.
 
 ---
 
@@ -97,7 +100,7 @@ Page type:              <hero | about | capabilities | method tile | lab card | 
 
 ## 3. Per-slot composition templates
 
-### `hero.png` — 16:9 (1536×1024)
+### `hero.png` — 1:1 (1024×1024)
 
 ```text
 Composition/framing: left half is intentionally empty/quiet to allow real
@@ -131,7 +134,7 @@ holding a pencil bottom-center. Crosshair and circular hairlines
 overlay. Page type: capabilities matrix.
 ```
 
-### `method-1.png` … `method-4.png` — 1:1 (1024×1024)
+### `method-1.png` … `method-4.png` — 1:1 (816×816)
 
 ```text
 Composition: a single visual metaphor per step.
@@ -144,7 +147,7 @@ mustard accent piece, and one numbered annotation tag. Page type:
 method tile.
 ```
 
-### `lab-1.png` … `lab-5.png` — 4:5 (1024×1280)
+### `lab-1.png` … `lab-5.png` — 3:4 (768×1024)
 
 ```text
 Composition: portrait-oriented experiment cards. Each is a square-ish
@@ -159,7 +162,7 @@ Use the same paper ground; allow soft drop shadow but stay restrained.
 Page type: lab card.
 ```
 
-### `work-1.png` & `work-2.png` — 4:3 (1280×1024)
+### `work-1.png` & `work-2.png` — 3:4 (768×1024)
 
 ```text
 Composition: featured work plates.

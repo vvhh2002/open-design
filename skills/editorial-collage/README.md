@@ -10,14 +10,16 @@ editorial-collage/
 └── assets/
     ├── imagegen-prompts.md        ← style anchor + per-slot prompt pack
     ├── image-manifest.json        ← slot → file/size/prompt mapping (16 images)
-    ├── hero.png                   ← 16:9 hero collage
+    ├── hero.png                   ← 1:1 hero collage
     ├── about.png                  ← 1:1 manifesto plate
     ├── capabilities.png           ← 1:1 capabilities matrix
     ├── method-1..4.png            ← 4× 1:1 method tiles
-    ├── lab-1..5.png               ← 5× 4:5 experiment cards
-    ├── work-1..2.png              ← 2× 4:3 selected work plates
+    ├── lab-1..5.png               ← 5× 3:4 experiment cards
+    ├── work-1..2.png              ← 2× 3:4 selected work plates
     ├── testimonial.png            ← 1:1 portrait bust
     └── cta.png                    ← 1:1 closing plate
+
+Authoritative per-slot dimensions live in `assets/image-manifest.json`.
 ```
 
 ## Pairs with
@@ -39,7 +41,8 @@ python3 -m http.server 8765
 1. Update the `<title>`, brand mark `Ø`, brand name, `vol_issue`,
    `coords`, `filed_under`, headline, italic words, and section copy.
 2. Regenerate the brand-sensitive images (`hero`, `about`,
-   `capabilities`, `cta`, `work-1`, `work-2`) using
-   `assets/imagegen-prompts.md`.
-3. Reuse the `method-1..4`, `lab-1..5`, and `testimonial` images —
-   they read as abstract collage motifs and travel between brands.
+   `capabilities`, `cta`, `testimonial`, `work-1`, `work-2`) using
+   `assets/imagegen-prompts.md`. These slots are flagged
+   `rekey_on_brand_change: true` in `image-manifest.json`.
+3. Reuse the `method-1..4` and `lab-1..5` images — they read as
+   abstract collage motifs and travel between brands.
