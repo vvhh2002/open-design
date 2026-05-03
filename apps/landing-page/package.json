@@ -1,0 +1,26 @@
+{
+  "name": "@open-design/landing-page",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --port 17574",
+    "build": "next build",
+    "start": "next start --port 17574",
+    "typecheck": "tsc -b --noEmit"
+  },
+  "dependencies": {
+    "next": "^16.2.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.10",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "typescript": "^5.6.3"
+  },
+  "engines": {
+    "node": "~24"
+  }
+}

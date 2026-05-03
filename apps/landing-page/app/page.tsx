@@ -1,0 +1,1034 @@
+/*
+ * Open Design — Atelier Zero landing page.
+ *
+ * Mirrors `skills/editorial-collage/example.html` 1:1. When the canonical
+ * example.html changes, mirror the diff here and into `app/globals.css`.
+ *
+ * Server component — no client-side state, no hooks. Every interactive
+ * affordance (pill filter, work-arrow nav) is currently visual-only;
+ * promote to a client island only when behavior is needed.
+ */
+
+const arrowOut = (
+  <svg viewBox='0 0 24 24'>
+    <path d='M5 19L19 5M19 5H8M19 5v11' />
+  </svg>
+);
+
+const arrowPlus = (
+  <svg viewBox='0 0 24 24'>
+    <circle cx='12' cy='12' r='9' />
+    <path d='M9 12h6M12 9v6' />
+  </svg>
+);
+
+const NBSP = '\u00A0';
+
+export default function Page() {
+  return (
+    <>
+      {/* side rails (rotated brand text) */}
+      <div className='side-rail right' data-od-id='rail-right'>
+        <span className='rail-text'>
+          Open Design — Vol. 01 · Issue Nº 26 · Apache-2.0
+        </span>
+      </div>
+      <div className='side-rail left' data-od-id='rail-left'>
+        <span className='rail-text'>
+          Skills · Systems · Agents · BYOK · Local-first
+        </span>
+      </div>
+
+      <div className='shell'>
+        {/* ====== TOP METADATA STRIP ====== */}
+        <div className='topbar' data-od-id='topbar'>
+          <div className='container topbar-inner'>
+            <span>
+              <b>OD / 2026</b>
+              {NBSP}·{NBSP}Vol. 01 / Issue Nº 26
+            </span>
+            <span className='mid'>
+              <span>
+                Filed under <b className='coral'>Design · Intelligence</b>
+              </span>
+              <span>Compiled by Open Design</span>
+              <span>Apache-2.0 · Made on Earth</span>
+            </span>
+            <span className='right'>
+              <span>
+                <span className='pulse' />
+                Live · v0.4.6
+              </span>
+              <span>
+                <b>EN</b> · DE · 中文 · 日本語
+              </span>
+            </span>
+          </div>
+        </div>
+
+        {/* ====== NAV ====== */}
+        <header className='nav' data-od-id='nav'>
+          <div className='container nav-inner'>
+            <a href='#top' className='brand'>
+              <span className='brand-mark'>Ø</span>
+              <span>Open Design</span>
+              <span className='brand-meta'>
+                <b>Studio Nº 01</b>Berlin / Open / Earth
+              </span>
+            </a>
+            <nav>
+              <ul className='nav-links'>
+                <li>
+                  <a href='#skills'>
+                    Skills<span className='num'>31</span>
+                  </a>
+                </li>
+                <li>
+                  <a href='#systems'>
+                    Systems<span className='num'>72</span>
+                  </a>
+                </li>
+                <li>
+                  <a href='#agents'>
+                    Agents<span className='num'>12</span>
+                  </a>
+                </li>
+                <li>
+                  <a href='#labs'>
+                    Labs<span className='num'>05</span>
+                  </a>
+                </li>
+                <li>
+                  <a href='#contact'>Contact</a>
+                </li>
+              </ul>
+            </nav>
+            <div className='nav-side'>
+              <a className='nav-cta' href='https://github.com/nexu-io/open-design'>
+                Star · 0K
+              </a>
+              <span className='status-dot' aria-hidden='true' />
+            </div>
+          </div>
+        </header>
+
+        {/* ====== HERO ====== */}
+        <section className='hero' id='top' data-od-id='hero'>
+          <div className='container hero-grid'>
+            <div className='hero-copy'>
+              <span className='label'>
+                Open-source design studio <span className='ix'>· Nº 01</span>
+              </span>
+              <h1 className='display'>
+                Designing <em>intelligence</em> with skills, <em>taste,</em> and{' '}
+                <em>code</em>
+                <span className='dot'>.</span>
+              </h1>
+              <p className='lead'>
+                Open Design is the open-source alternative to Claude Design. 12
+                coding-agent CLIs auto-detected on your{' '}
+                <code className='code-inline'>$PATH</code>, driven by 31
+                composable skills and 72 brand-grade design systems. Local-first,
+                web-deployable, BYOK at every layer.
+              </p>
+              <div className='hero-actions'>
+                <a className='btn btn-primary' href='#agents'>
+                  Explore the studio
+                  <span className='arrow'>{arrowOut}</span>
+                </a>
+                <a className='btn btn-ghost' href='#labs'>
+                  View skills
+                  <span className='arrow'>{arrowPlus}</span>
+                </a>
+              </div>
+              <div className='hero-stats'>
+                <div className='stat'>
+                  <span className='ring solid'>31</span>
+                  <span className='stat-label'>
+                    <b>skills</b>shippable
+                  </span>
+                </div>
+                <div className='stat'>
+                  <span className='ring'>72</span>
+                  <span className='stat-label'>
+                    <b>systems</b>portable
+                  </span>
+                </div>
+                <div className='stat'>
+                  <span className='ring coral'>12</span>
+                  <span className='stat-label'>
+                    <b>CLIs</b>BYO agent
+                  </span>
+                </div>
+              </div>
+              <div className='hero-foot'>
+                <span className='meta'>
+                  ↳{NBSP}{NBSP}pnpm tools-dev{NBSP}{NBSP}·{NBSP}{NBSP}3 commands
+                  to start
+                </span>
+                <span className='coord'>
+                  52.5200° N{NBSP}·{NBSP}13.4050° E
+                </span>
+              </div>
+            </div>
+            <div className='hero-art'>
+              <span className='corner tl' />
+              <span className='corner tr' />
+              <span className='corner bl' />
+              <span className='corner br' />
+              <span className='annot annot-tl coord'>FIG. 01 / OD-26</span>
+              <span className='annot annot-tr'>Plate Nº 08</span>
+              <span className='annot annot-bl coord'>SHA · a1b2c3d</span>
+              <span className='annot annot-br'>
+                Composed in{NBSP}
+                <span style={{ color: 'var(--coral)' }}>Open Design</span>
+              </span>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src='/assets/hero.png' alt='' />
+              <div className='index'>
+                <span>
+                  <span className='n'>01</span>Detect
+                </span>
+                <span className='on'>
+                  <span className='n'>02</span>Discover
+                </span>
+                <span>
+                  <span className='n'>03</span>Direct
+                </span>
+                <span>
+                  <span className='n'>04</span>Deliver
+                </span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ====== ABOUT ====== */}
+        <section className='about' data-od-id='about'>
+          <div className='container'>
+            <div className='sec-rule'>
+              <span className='roman'>I.</span>
+              <span className='meta-grp'>
+                <span>About / Manifesto</span>
+                <span className='dot-mark'>•</span>
+                <span>Open Design / Volume 01</span>
+              </span>
+              <span>002 / 008</span>
+            </div>
+            <div className='about-grid'>
+              <div className='about-copy'>
+                <span className='label'>
+                  About the studio <span className='ix'>· Nº 02</span>
+                </span>
+                <h2 className='display'>
+                  We treat <em>your agent</em> as a creative{' '}
+                  <em>collaborator,</em> not a black box
+                  <span className='dot'>.</span>
+                </h2>
+                <p className='lead'>
+                  The strongest coding agents already live on your laptop. We
+                  don&rsquo;t ship one — we wire them into a skill-driven design
+                  workflow that runs locally with{' '}
+                  <code className='code-inline'>pnpm tools-dev</code>, deploys
+                  the web layer to Vercel, and stays BYOK at every layer.
+                </p>
+                <a className='btn btn-ghost' href='#agents'>
+                  Read our approach
+                  <span className='arrow'>{arrowOut}</span>
+                </a>
+                <div className='footer-row'>
+                  <span className='mark'>Ø</span>
+                  <span>Research · Design · Engineering · Repeat</span>
+                  <span className='stamp'>
+                    <span>Studio practice</span>
+                    <span style={{ color: 'var(--ink)' }}>Est. MMXXVI</span>
+                  </span>
+                </div>
+              </div>
+              <div className='about-art'>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src='/assets/about.png' alt='' />
+                <div className='about-side-note'>
+                  <b />
+                  From model behavior
+                  <br />
+                  to visual taste, we
+                  <br />
+                  prototype the full
+                  <br />
+                  stack of creative
+                  <br />
+                  systems.
+                </div>
+                <div className='about-caption'>
+                  <b>Studies in form · perception · machine imagination.</b>
+                  (Open Design, MMXXVI)
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ====== CAPABILITIES ====== */}
+        <section
+          className='capabilities'
+          id='agents'
+          data-od-id='capabilities'
+        >
+          <div className='container'>
+            <div className='sec-rule'>
+              <span className='roman'>II.</span>
+              <span className='meta-grp'>
+                <span>Capabilities · Skills · Systems</span>
+                <span className='dot-mark'>•</span>
+                <span>4 surfaces / 1 loop</span>
+              </span>
+              <span>003 / 008</span>
+            </div>
+            <div className='capabilities-grid'>
+              <div className='capabilities-art'>
+                <span className='corner tl' />
+                <span className='corner br' />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src='/assets/capabilities.png' alt='' />
+                <div className='ribbon'>
+                  <b>OPEN DESIGN</b>
+                  {NBSP}·{NBSP}CAPABILITIES MATRIX{NBSP}·{NBSP}OD/26
+                </div>
+              </div>
+              <div className='capabilities-copy'>
+                <span className='label'>
+                  Capabilities <span className='ix'>· Nº 03</span>
+                </span>
+                <h2 className='display'>
+                  Skills, systems, and surfaces <em>for creative</em>{' '}
+                  intelligence<span className='dot'>.</span>
+                </h2>
+                <p className='lead'>
+                  We blend human taste with whichever agent you already trust to
+                  ship interfaces, decks, and editorial pages that feel
+                  intentional, expressive, and alive.
+                </p>
+                <div className='cards'>
+                  <div className='card'>
+                    <div className='num'>
+                      01<span className='tag'>Skills</span>
+                    </div>
+                    <svg
+                      className='icon'
+                      viewBox='0 0 24 24'
+                      fill='none'
+                      stroke='currentColor'
+                      strokeWidth='1.5'
+                    >
+                      <circle cx='9' cy='9' r='5' />
+                      <path d='M14 14l5 5' />
+                    </svg>
+                    <h3>
+                      Skills,
+                      <br />
+                      not plugins
+                    </h3>
+                    <p>
+                      31 file-based{' '}
+                      <code style={{ fontFamily: 'var(--mono)', fontSize: 12 }}>
+                        SKILL.md
+                      </code>{' '}
+                      bundles. Drop a folder in, restart the daemon, it appears.
+                    </p>
+                    <a className='arrow-mark' href='#'>
+                      {arrowOut}
+                    </a>
+                  </div>
+                  <div className='card'>
+                    <div className='num'>
+                      02<span className='tag'>Systems</span>
+                    </div>
+                    <svg
+                      className='icon'
+                      viewBox='0 0 24 24'
+                      fill='none'
+                      stroke='currentColor'
+                      strokeWidth='1.5'
+                    >
+                      <rect x='3.5' y='3.5' width='8' height='8' />
+                      <rect x='12.5' y='3.5' width='8' height='8' />
+                      <rect x='3.5' y='12.5' width='8' height='8' />
+                      <rect x='12.5' y='12.5' width='8' height='8' />
+                    </svg>
+                    <h3>
+                      Design Systems
+                      <br />
+                      as Markdown
+                    </h3>
+                    <p>
+                      72 portable{' '}
+                      <code style={{ fontFamily: 'var(--mono)', fontSize: 12 }}>
+                        DESIGN.md
+                      </code>{' '}
+                      systems — Linear, Vercel, Stripe, Apple, Cursor, Figma…
+                    </p>
+                    <a className='arrow-mark' href='#'>
+                      {arrowOut}
+                    </a>
+                  </div>
+                  <div className='card'>
+                    <div className='num'>
+                      03<span className='tag'>Adapters</span>
+                    </div>
+                    <svg
+                      className='icon'
+                      viewBox='0 0 24 24'
+                      fill='none'
+                      stroke='currentColor'
+                      strokeWidth='1.5'
+                    >
+                      <circle cx='8' cy='12' r='4.5' />
+                      <circle cx='16' cy='12' r='4.5' />
+                    </svg>
+                    <h3>
+                      12 Agent
+                      <br />
+                      Adapters
+                    </h3>
+                    <p>
+                      Claude · Codex · Gemini · Cursor · Copilot · OpenCode ·
+                      Devin · Hermes · Pi · Kimi · Kiro · Qwen — auto-detected
+                      on $PATH.
+                    </p>
+                    <a className='arrow-mark' href='#'>
+                      {arrowOut}
+                    </a>
+                  </div>
+                  <div className='card'>
+                    <div className='num'>
+                      04<span className='tag'>BYOK</span>
+                    </div>
+                    <svg
+                      className='icon'
+                      viewBox='0 0 24 24'
+                      fill='none'
+                      stroke='currentColor'
+                      strokeWidth='1.5'
+                    >
+                      <path d='M5 8h14v8H5z' />
+                      <path d='M9 12h6M12 9v6' />
+                    </svg>
+                    <h3>
+                      BYOK
+                      <br />
+                      at every layer
+                    </h3>
+                    <p>
+                      OpenAI-compatible proxy. DeepSeek, Groq, OpenRouter, your
+                      self-hosted vLLM — paste a baseUrl + key, ship.
+                    </p>
+                    <a className='arrow-mark' href='#'>
+                      {arrowOut}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ====== LABS ====== */}
+        <section className='labs' id='labs' data-od-id='labs'>
+          <div className='container'>
+            <div className='sec-rule'>
+              <span className='roman'>III.</span>
+              <span className='meta-grp'>
+                <span>Labs / Skills Catalog</span>
+                <span className='dot-mark'>•</span>
+                <span>05 of 31 ongoing</span>
+              </span>
+              <span>004 / 008</span>
+            </div>
+            <div className='labs-head'>
+              <div>
+                <span className='label'>
+                  Labs <span className='ix'>· Nº 04</span>
+                </span>
+                <h2 className='display' style={{ marginTop: 30 }}>
+                  A living archive of <em>experiments</em> in skills, decks, and
+                  machine-made form<span className='dot'>.</span>
+                </h2>
+              </div>
+              <div className='pills'>
+                <button type='button' className='pill active'>
+                  All<span className='count'>31</span>
+                </button>
+                <button type='button' className='pill'>
+                  Prototype<span className='count'>27</span>
+                </button>
+                <button type='button' className='pill'>
+                  Deck<span className='count'>04</span>
+                </button>
+                <button type='button' className='pill'>
+                  Mobile<span className='count'>03</span>
+                </button>
+                <button type='button' className='pill'>
+                  Office<span className='count'>08</span>
+                </button>
+              </div>
+            </div>
+            <div className='labs-meta'>
+              <span className='ring'>05</span>
+              <div className='meta-text'>
+                <b>Ongoing experiments</b>
+                documenting ideas in flux
+                <br />
+                building intelligence
+                <br />
+                through making
+              </div>
+            </div>
+            <div className='labs-grid'>
+              {[
+                {
+                  badge: 'Deck',
+                  num: 'Nº 01',
+                  title: 'Magazine Decks',
+                  body: (
+                    <>
+                      Editorial-grade slide decks with{' '}
+                      <code style={{ fontFamily: 'var(--mono)', fontSize: 12 }}>
+                        guizang-ppt
+                      </code>
+                      . Magazine layout, WebGL hero.
+                    </>
+                  ),
+                  src: '/assets/lab-1.png',
+                },
+                {
+                  badge: 'Media',
+                  num: 'Nº 02',
+                  title: 'Synthetic Matter',
+                  body: 'Gpt-image-2 + Seedance + HyperFrames. Image, video, audio — same chat surface as code.',
+                  src: '/assets/lab-2.png',
+                },
+                {
+                  badge: 'Loop',
+                  num: 'Nº 03',
+                  title: 'Prompt Choreography',
+                  body: 'The interactive question form pops before a single pixel is improvised. 30s of radios beats 30min of redirects.',
+                  src: '/assets/lab-3.png',
+                },
+                {
+                  badge: 'Critique',
+                  num: 'Nº 04',
+                  title: 'Visual Reasoning',
+                  body: '5-dim self-critique gates every artifact: philosophy · hierarchy · execution · specificity · restraint.',
+                  src: '/assets/lab-4.png',
+                },
+                {
+                  badge: 'Runtime',
+                  num: 'Nº 05',
+                  title: 'Soft Systems',
+                  body: 'Sandboxed iframe preview. Streaming todos. Real-cwd filesystem. Adaptive loops between human and machine.',
+                  src: '/assets/lab-5.png',
+                },
+              ].map((lab) => (
+                <div className='lab' key={lab.num}>
+                  <div className='lab-img'>
+                    <span className='badge'>{lab.badge}</span>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={lab.src} alt='' />
+                  </div>
+                  <div className='num-row'>
+                    <span>{lab.num}</span>
+                    <span>2026</span>
+                  </div>
+                  <h4>{lab.title}</h4>
+                  <p>{lab.body}</p>
+                  <a className='arrow-mark' href='#'>
+                    {arrowOut}
+                  </a>
+                </div>
+              ))}
+            </div>
+            <div className='labs-foot'>
+              <div className='progress'>
+                <span className='on' />
+                <span className='on' />
+                <span className='on' />
+                <span className='on' />
+                <span className='on' />
+                <span />
+                <span />
+                <span />
+              </div>
+              <span className='meta'>
+                05 / 31 SKILLS{NBSP}·{NBSP}
+                <span style={{ color: 'var(--coral)' }}>
+                  VIEW FULL LIBRARY →
+                </span>
+              </span>
+            </div>
+          </div>
+        </section>
+
+        {/* ====== METHOD ====== */}
+        <section className='method' data-od-id='method'>
+          <div className='container'>
+            <div className='sec-rule'>
+              <span className='roman'>IV.</span>
+              <span className='meta-grp'>
+                <span>Method / Loop</span>
+                <span className='dot-mark'>•</span>
+                <span>04 stages, iterative</span>
+              </span>
+              <span>005 / 008</span>
+            </div>
+            <div className='method-head'>
+              <div>
+                <span className='label'>
+                  Method <span className='ix'>· Nº 05</span>
+                </span>
+                <h2 className='display' style={{ marginTop: 30 }}>
+                  From <em>signals</em> to systems<span className='dot'>.</span>
+                </h2>
+              </div>
+              <div className='right'>
+                <span className='plus'>+</span>
+                <p>
+                  Every stage is iterative, visual, and research-driven —
+                  composable files, not opaque prompts.
+                </p>
+              </div>
+            </div>
+            <div className='method-grid'>
+              {[
+                {
+                  num: '01',
+                  title: 'Detect',
+                  body: 'The daemon scans your $PATH for 12 coding agents and auto-loads 31 skills + 72 systems on boot.',
+                  src: '/assets/method-1.png',
+                },
+                {
+                  num: '02',
+                  title: 'Discover',
+                  body: 'Turn 1 is a question form — surface, audience, tone, scale, brand context. Locked in 30 seconds.',
+                  src: '/assets/method-2.png',
+                },
+                {
+                  num: '03',
+                  title: 'Direct',
+                  body: 'Pick one of 5 deterministic visual directions. Palette in OKLch, font stack, layout posture cues.',
+                  src: '/assets/method-3.png',
+                },
+                {
+                  num: '04',
+                  title: 'Deliver',
+                  body: 'The agent writes to disk, you preview in a sandboxed iframe, export HTML / PDF / PPTX / ZIP / Markdown.',
+                  src: '/assets/method-4.png',
+                },
+              ].map((step) => (
+                <div className='method-step' key={step.num}>
+                  <div className='num'>{step.num}</div>
+                  <h4>
+                    {step.title} <span className='arrow-r'>→</span>
+                  </h4>
+                  <p>{step.body}</p>
+                  <div className='img'>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={step.src} alt='' />
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className='method-foot'>
+              <div className='left'>
+                <span className='ring' />
+                <span>Skills inform everything. Files make it real.</span>
+              </div>
+              <div className='right'>
+                <b>github.com/nexu-io/open-design</b>
+                {NBSP}·{NBSP}Apache-2.0
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ====== SELECTED WORK ====== */}
+        <section className='tight' data-od-id='work'>
+          <div className='work'>
+            <div className='work-rule'>
+              <span className='roman'>V.</span>
+              <span style={{ display: 'inline-flex', gap: 24 }}>
+                <span>Selected Work · 2026 Catalog</span>
+                <span style={{ color: 'var(--coral)' }}>•</span>
+                <span>Edited by Open Design</span>
+              </span>
+              <span>006 / 008</span>
+            </div>
+            <div className='work-grid'>
+              <div className='work-copy'>
+                <span className='label'>Selected work</span>
+                <h2>
+                  Skills that turn briefs into <em>memorable</em> shippable{' '}
+                  <em>artifacts</em>
+                  <span className='dot'>.</span>
+                </h2>
+                <a className='work-link' href='#labs'>
+                  View all 31 skills
+                </a>
+              </div>
+              <div className='work-card'>
+                <div className='label-row'>
+                  <span className='small-label'>Featured skill</span>
+                  <span className='index'>01 / 31</span>
+                </div>
+                <h3>guizang-ppt</h3>
+                <p>
+                  Magazine-style web PPT for product launches and pitch decks.
+                  Bundled verbatim, original LICENSE preserved.
+                </p>
+                <div className='img'>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src='/assets/work-1.png' alt='' />
+                </div>
+                <div className='meta-row'>
+                  <span className='year'>2026 · DECK</span>
+                  <span>DEFAULT</span>
+                </div>
+              </div>
+              <div className='work-card alt'>
+                <div className='label-row'>
+                  <span className='small-label'>Companion</span>
+                  <span className='index'>04 / 31</span>
+                </div>
+                <h3>dating-web</h3>
+                <p>
+                  A consumer dashboard reference, ticker bar, KPIs, editorial
+                  typography.
+                </p>
+                <div className='img'>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src='/assets/work-2.png' alt='' />
+                </div>
+                <div className='meta-row'>
+                  <span className='year'>2026 · WEB</span>
+                  <span>PROTOTYPE</span>
+                </div>
+              </div>
+            </div>
+            <div className='work-arrows'>
+              <button type='button' className='nav-btn'>
+                <svg
+                  width='14'
+                  height='14'
+                  viewBox='0 0 24 24'
+                  fill='none'
+                  stroke='currentColor'
+                  strokeWidth='1.6'
+                >
+                  <path d='M14 6l-6 6 6 6' />
+                </svg>
+              </button>
+              <button type='button' className='nav-btn active'>
+                <svg
+                  width='14'
+                  height='14'
+                  viewBox='0 0 24 24'
+                  fill='none'
+                  stroke='currentColor'
+                  strokeWidth='1.6'
+                >
+                  <path d='M10 6l6 6-6 6' />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        {/* ====== TESTIMONIAL / COLLABORATORS ====== */}
+        <section className='testimonial' data-od-id='testimonial'>
+          <div className='container'>
+            <div className='sec-rule'>
+              <span className='roman'>VI.</span>
+              <span className='meta-grp'>
+                <span>Collaborators / Lineage</span>
+                <span className='dot-mark'>•</span>
+                <span>Standing on shoulders</span>
+              </span>
+              <span>007 / 008</span>
+            </div>
+            <div className='testimonial-grid'>
+              <div className='testimonial-copy'>
+                <span className='label'>
+                  Collaborators <span className='ix'>· Nº 06</span>
+                </span>
+                <h2 style={{ marginTop: 30 }}>
+                  &ldquo;Open Design helped us turn vague <em>AI ideas</em> into
+                  a visual system that felt <em>sharp, believable,</em> and
+                  genuinely new.&rdquo;
+                </h2>
+                <div className='author'>
+                  <span className='avatar'>m</span>
+                  <p>
+                    Mina Kovac
+                    <br />
+                    <span>Creative Director · North Form</span>
+                  </p>
+                </div>
+                <div className='divider' />
+                <p className='partners-text'>
+                  Standing on the shoulders of teams shipping open-source design
+                  culture.
+                </p>
+                <div className='partners'>
+                  <div className='partner'>
+                    <div className='glyph'>
+                      <svg
+                        viewBox='0 0 80 30'
+                        fill='none'
+                        stroke='currentColor'
+                        strokeWidth='2'
+                      >
+                        <path d='M5 24L20 6L35 24M12 18h16' />
+                      </svg>
+                    </div>
+                    <span>huashu-design</span>
+                    <small>Philosophy</small>
+                  </div>
+                  <div className='partner'>
+                    <div className='glyph'>
+                      <svg
+                        viewBox='0 0 80 30'
+                        fill='none'
+                        stroke='currentColor'
+                        strokeWidth='2'
+                      >
+                        <path d='M8 24L20 6L24 22L36 4' />
+                      </svg>
+                    </div>
+                    <span>guizang-ppt</span>
+                    <small>Decks</small>
+                  </div>
+                  <div className='partner'>
+                    <div className='glyph'>
+                      <svg
+                        viewBox='0 0 80 30'
+                        fill='none'
+                        stroke='currentColor'
+                        strokeWidth='2'
+                      >
+                        <rect x='6' y='6' width='4' height='18' />
+                        <rect x='14' y='6' width='4' height='18' />
+                        <rect x='22' y='6' width='4' height='18' />
+                        <rect x='30' y='6' width='4' height='18' />
+                      </svg>
+                    </div>
+                    <span>multica-ai</span>
+                    <small>Daemon</small>
+                  </div>
+                  <div className='partner'>
+                    <div className='glyph'>
+                      <svg
+                        viewBox='0 0 80 30'
+                        fill='none'
+                        stroke='currentColor'
+                        strokeWidth='2'
+                      >
+                        <circle cx='15' cy='15' r='9' />
+                        <path d='M15 6v18M6 15h18' />
+                      </svg>
+                    </div>
+                    <span>open-codesign</span>
+                    <small>UX</small>
+                  </div>
+                  <div className='partner'>
+                    <div className='glyph'>
+                      <svg
+                        viewBox='0 0 80 30'
+                        fill='none'
+                        stroke='currentColor'
+                        strokeWidth='2'
+                      >
+                        <path d='M8 6L8 24M22 6L22 24M8 15h14' />
+                      </svg>
+                    </div>
+                    <span>Claude Code</span>
+                    <small>Skills.md</small>
+                  </div>
+                </div>
+                <a className='read-more' href='#'>
+                  Read more stories
+                </a>
+              </div>
+              <div className='testimonial-art'>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src='/assets/testimonial.png' alt='' />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ====== CTA ====== */}
+        <section className='cta' id='contact' data-od-id='cta'>
+          <div className='container'>
+            <div className='sec-rule'>
+              <span className='roman'>VII.</span>
+              <span className='meta-grp'>
+                <span>Contact / Conversation</span>
+                <span className='dot-mark'>•</span>
+                <span>Three commands to ship</span>
+              </span>
+              <span>008 / 008</span>
+            </div>
+            <div className='cta-grid'>
+              <div>
+                <span className='label'>
+                  Start a conversation <span className='ix'>· Nº 07</span>
+                </span>
+                <h2 className='display'>
+                  Let&rsquo;s build something <em>open</em> and{' '}
+                  <em>visually</em> unforgettable<span className='dot'>.</span>
+                </h2>
+                <p className='lead'>
+                  Star us on GitHub, drop into the issues, or run{' '}
+                  <code className='code-inline'>pnpm tools-dev</code> tonight.
+                  Three commands and the loop is yours.
+                </p>
+                <div className='cta-actions'>
+                  <a
+                    className='btn btn-primary'
+                    href='https://github.com/nexu-io/open-design'
+                  >
+                    Star on GitHub
+                    <span className='arrow'>{arrowOut}</span>
+                  </a>
+                  <a className='email-pill' href='mailto:hello@open-design.dev'>
+                    hello@open-design.dev
+                    <span className='arrow-circle'>→</span>
+                  </a>
+                </div>
+                <div className='cta-foot'>
+                  <span className='stamp'>● Live</span>
+                  <span>v0.4.6 / Apache-2.0</span>
+                  <span style={{ marginLeft: 'auto' }}>
+                    52.5200° N · 13.4050° E
+                  </span>
+                </div>
+              </div>
+              <div className='cta-art'>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src='/assets/cta.png' alt='' />
+                <div className='index'>Nº 08</div>
+                <div className='ribbon'>
+                  OPEN DESIGN{NBSP}·{NBSP}FIN.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ====== FOOTER ====== */}
+        <footer data-od-id='footer'>
+          <div className='container'>
+            <div className='foot-grid'>
+              <div className='foot-brand'>
+                <a href='#top' className='brand'>
+                  <span className='brand-mark'>Ø</span>
+                  <span>Open Design</span>
+                </a>
+                <p style={{ marginTop: 18 }}>
+                  The open-source alternative to Claude Design. Built on the
+                  shoulders of huashu-design, guizang-ppt, multica-ai, and
+                  open-codesign.
+                </p>
+              </div>
+              <div className='foot-col'>
+                <h5>Studio</h5>
+                <ul>
+                  <li>
+                    <a href='#agents'>Capabilities</a>
+                  </li>
+                  <li>
+                    <a href='#labs'>Labs</a>
+                  </li>
+                  <li>
+                    <a href='#'>Method</a>
+                  </li>
+                  <li>
+                    <a href='#'>Manifesto</a>
+                  </li>
+                </ul>
+              </div>
+              <div className='foot-col'>
+                <h5>Library</h5>
+                <ul>
+                  <li>
+                    <a href='#'>31 Skills</a>
+                  </li>
+                  <li>
+                    <a href='#'>72 Systems</a>
+                  </li>
+                  <li>
+                    <a href='#'>5 Directions</a>
+                  </li>
+                  <li>
+                    <a href='#'>5 Frames</a>
+                  </li>
+                </ul>
+              </div>
+              <div className='foot-col'>
+                <h5>Connect</h5>
+                <ul>
+                  <li>
+                    <a href='https://github.com/nexu-io/open-design'>GitHub</a>
+                  </li>
+                  <li>
+                    <a href='#'>X / Twitter</a>
+                  </li>
+                  <li>
+                    <a href='#'>Discord</a>
+                  </li>
+                  <li>
+                    <a href='#'>RSS</a>
+                  </li>
+                </ul>
+              </div>
+              <div className='foot-col'>
+                <h5>Docs</h5>
+                <ul>
+                  <li>
+                    <a href='#'>Quickstart</a>
+                  </li>
+                  <li>
+                    <a href='#'>Architecture</a>
+                  </li>
+                  <li>
+                    <a href='#'>Skill Protocol</a>
+                  </li>
+                  <li>
+                    <a href='#'>Roadmap</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className='foot-bottom'>
+              <span>
+                <span className='pulse' />●{' '}
+                <b style={{ color: 'var(--ink)' }}>Open Design</b> · Apache-2.0
+                · 2026 / Volume 01 / Issue Nº 26
+              </span>
+              <span className='right'>
+                <span>Berlin / Open / Earth</span>
+                <span>52.5200° N · 13.4050° E</span>
+                <span style={{ color: 'var(--coral)' }}>♥ MMXXVI</span>
+              </span>
+            </div>
+            <div className='foot-mega'>
+              <div className='word'>
+                Open <em>Design</em>.
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </>
+  );
+}
