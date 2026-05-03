@@ -51,7 +51,6 @@ export default function Page() {
               <span>
                 Filed under <b className='coral'>Design · Intelligence</b>
               </span>
-              <span>Compiled by Open Design</span>
               <span>Apache-2.0 · Made on Earth</span>
             </span>
             <span className='right'>
