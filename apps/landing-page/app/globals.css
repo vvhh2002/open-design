@@ -66,13 +66,26 @@ body {
 }
 img, video, canvas { max-width: 100%; height: auto; }
 
-/* paper texture overlay across the whole page */
+/*
+ * Paper texture overlay across the whole page.
+ *
+ * Rendered ABOVE `.shell` (z-index 2) so the noise/grain multiply blend
+ * applies uniformly to every section — including `.topbar` and `.nav`,
+ * which have an opaque `background: var(--paper)` to keep sticky-scroll
+ * content readable. Without this, opaque sections would show clean paper
+ * and transparent sections (hero, about, …) would show textured paper,
+ * which reads as two slightly different colors at the seam.
+ *
+ * Z-index is set equal to the side-rails (also z-index 3); because the
+ * pseudo-element appears in document order before the rails, the rails
+ * paint on top of the texture and keep their crisp rotated lettering.
+ */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 1;
+  z-index: 3;
   background-image:
     radial-gradient(circle at 12% 18%, rgba(106, 92, 56, 0.07) 0, transparent 28%),
     radial-gradient(circle at 88% 72%, rgba(106, 92, 56, 0.06) 0, transparent 32%),

@@ -976,28 +976,6 @@ export default function Page() {
                   <a
                     className='partner'
                     data-reveal
-                    href={LINEAGE['multica-ai']}
-                    {...ext}
-                  >
-                    <div className='glyph'>
-                      <svg
-                        viewBox='0 0 80 30'
-                        fill='none'
-                        stroke='currentColor'
-                        strokeWidth='2'
-                      >
-                        <rect x='6' y='6' width='4' height='18' />
-                        <rect x='14' y='6' width='4' height='18' />
-                        <rect x='22' y='6' width='4' height='18' />
-                        <rect x='30' y='6' width='4' height='18' />
-                      </svg>
-                    </div>
-                    <span>multica-ai</span>
-                    <small>Daemon</small>
-                  </a>
-                  <a
-                    className='partner'
-                    data-reveal
                     href={LINEAGE['open-codesign']}
                     {...ext}
                   >

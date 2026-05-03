@@ -64,13 +64,19 @@ body {
   position: relative;
 }
 
-/* paper texture overlay across the whole page */
+/*
+ * Paper texture overlay across the whole page. Rendered above .shell so
+ * the multiply blend applies uniformly to every section — including the
+ * opaque .topbar and .nav — instead of only to transparent sections
+ * (hero, about, …). Equal z-index to .side-rail; the rails appear later
+ * in document order and therefore stay on top of the texture.
+ */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 1;
+  z-index: 3;
   background-image:
     radial-gradient(circle at 12% 18%, rgba(106, 92, 56, 0.07) 0, transparent 28%),
     radial-gradient(circle at 88% 72%, rgba(106, 92, 56, 0.06) 0, transparent 32%),
@@ -2397,15 +2403,6 @@ footer {
     </div>
     <span>guizang-ppt</span>
     <small>Decks</small>
-  </a>
-        <a class='partner' data-reveal href='https://github.com/multica-ai/multica' target='_blank' rel='noreferrer noopener'>
-    <div class='glyph'>
-      <svg viewBox='0 0 80 30' fill='none' stroke='currentColor' stroke-width='2'>
-        <rect x='6' y='6' width='4' height='18'/><rect x='14' y='6' width='4' height='18'/><rect x='22' y='6' width='4' height='18'/><rect x='30' y='6' width='4' height='18'/>
-      </svg>
-    </div>
-    <span>multica-ai</span>
-    <small>Daemon</small>
   </a>
         <a class='partner' data-reveal href='https://github.com/OpenCoworkAI/open-codesign' target='_blank' rel='noreferrer noopener'>
     <div class='glyph'>
