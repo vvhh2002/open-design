@@ -147,7 +147,43 @@ body::before {
 }
 
 /* nav */
-.nav { padding: 22px 0; position: relative; z-index: 5; }
+/*
+ * Headroom-style sticky header.
+ *
+ * The element is always `position: sticky`, so the browser docks it to the
+ * top of the viewport once the topbar has scrolled away. The
+ * `<Header />` client island then toggles the `is-hidden` modifier based
+ * on scroll direction, which animates the bar in and out via `transform`.
+ *
+ * When the user is at the very top of the page, the topbar is still
+ * visible above the nav and `position: sticky` simply leaves the nav in
+ * its natural flow position — exactly the brief.
+ */
+.nav {
+  padding: 22px 0;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--paper);
+  transform: translateY(0);
+  transition: transform 360ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    box-shadow 220ms ease,
+    border-color 220ms ease;
+  border-bottom: 1px solid transparent;
+  will-change: transform;
+}
+/*
+ * Subtle visual cue once we leave the top of the page. We can't tell from
+ * CSS alone whether the bar is "stuck"; the deadband + class toggle in
+ * <Header /> approximates it well enough for our purpose. We rely on the
+ * `is-hidden` toggle to flicker the border while moving and a steady
+ * border once docked.
+ */
+.nav.is-hidden {
+  transform: translateY(-100%);
+  pointer-events: none;
+  box-shadow: none;
+}
 .nav-inner {
   display: flex;
   align-items: center;
@@ -1586,6 +1622,9 @@ footer {
     scale: 1 !important;
     transition: none !important;
   }
+  /* Skip the slide-in on the sticky header for users who prefer no motion;
+   * the show/hide still toggles, just instantly. */
+  .nav { transition: none !important; }
 }
 
 /* responsive */

@@ -146,7 +146,33 @@
   }
 
   /* nav */
-  .nav { padding: 22px 0; position: relative; z-index: 5; }
+  /*
+   * Headroom-style sticky header. The bar is `position: sticky`, so the
+   * browser docks it once the topbar scrolls away. The bottom <script>
+   * toggles `is-hidden` based on scroll direction, which slides the bar
+   * out and back via the `transform` transition.
+   *
+   * At the very top of the page, the bar simply sits in its natural flow
+   * position below the topbar — no special styling.
+   */
+  .nav {
+    padding: 22px 0;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--paper);
+    transform: translateY(0);
+    transition: transform 360ms cubic-bezier(0.22, 0.61, 0.36, 1),
+      box-shadow 220ms ease,
+      border-color 220ms ease;
+    border-bottom: 1px solid transparent;
+    will-change: transform;
+  }
+  .nav.is-hidden {
+    transform: translateY(-100%);
+    pointer-events: none;
+    box-shadow: none;
+  }
   .nav-inner {
     display: flex;
     align-items: center;
@@ -1574,6 +1600,7 @@
       scale: 1 !important;
       transition: none !important;
     }
+    .nav { transition: none !important; }
   }
 
   /* responsive */
@@ -2290,6 +2317,58 @@
       }
     }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
     for (var j = 0; j < elements.length; j++) observer.observe(elements[j]);
+  })();
+
+  /*
+   * Headroom-style sticky header — mirrors apps/landing-page/app/_components/header.tsx.
+   * Hides the nav on downward scroll, re-pins it on upward scroll, and
+   * always keeps it visible near the top of the page.
+   */
+  (function () {
+    var nav = document.querySelector('header.nav');
+    if (!nav) return;
+    var SHOW_TOP = 100;
+    var DELTA = 6;
+    var lastY = window.scrollY || 0;
+    function onScroll() {
+      var y = window.scrollY || 0;
+      var d = y - lastY;
+      if (y <= SHOW_TOP) {
+        nav.classList.remove('is-hidden');
+      } else if (d > DELTA) {
+        nav.classList.add('is-hidden');
+      } else if (d < -DELTA) {
+        nav.classList.remove('is-hidden');
+      }
+      lastY = y;
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+  })();
+
+  /*
+   * GitHub star count — mirrors the fetch in the React Header component.
+   * Replaces the placeholder text in the nav CTA with the live count once
+   * the API call resolves. Failures fall back silently to the placeholder.
+   */
+  (function () {
+    var cta = document.querySelector('a.nav-cta');
+    if (!cta) return;
+    function format(n) {
+      if (!isFinite(n) || n <= 0) return '0';
+      if (n < 1000) return String(n);
+      var k = (n / 1000).toFixed(1).replace(/\.0$/, '');
+      return k + 'K';
+    }
+    fetch('https://api.github.com/repos/nexu-io/open-design', {
+      headers: { Accept: 'application/vnd.github+json' }
+    })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (data) {
+        if (!data || typeof data.stargazers_count !== 'number') return;
+        cta.textContent = 'Star · ' + format(data.stargazers_count);
+        cta.setAttribute('aria-label', 'Star Open Design on GitHub — ' + format(data.stargazers_count) + ' stars');
+      })
+      .catch(function () { /* leave placeholder on failure */ });
   })();
 </script>
 </body>

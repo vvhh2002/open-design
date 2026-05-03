@@ -4,10 +4,13 @@
  * Mirrors `skills/editorial-collage/example.html` 1:1. When the canonical
  * example.html changes, mirror the diff here and into `app/globals.css`.
  *
- * Server component — no client-side state, no hooks. Every interactive
- * affordance (pill filter, work-arrow nav) is currently visual-only;
- * promote to a client island only when behavior is needed.
+ * Server component — no client-side state, no hooks. The only client
+ * island is the <Header />, which owns the headroom-style scroll
+ * behavior and the live GitHub star count fetch. Promote other sections
+ * to client islands only when behavior is needed.
  */
+
+import { Header } from './_components/header';
 
 const arrowOut = (
   <svg viewBox='0 0 24 24'>
@@ -90,50 +93,8 @@ export default function Page() {
         </div>
 
         {/* ====== NAV ====== */}
-        <header className='nav' data-od-id='nav'>
-          <div className='container nav-inner'>
-            <a href='#top' className='brand'>
-              <span className='brand-mark'>Ø</span>
-              <span>Open Design</span>
-              <span className='brand-meta'>
-                <b>Studio Nº 01</b>Berlin / Open / Earth
-              </span>
-            </a>
-            <nav>
-              <ul className='nav-links'>
-                <li>
-                  <a href={REPO_SKILLS} {...ext}>
-                    Skills<span className='num'>31</span>
-                  </a>
-                </li>
-                <li>
-                  <a href={REPO_DESIGN_SYSTEMS} {...ext}>
-                    Systems<span className='num'>72</span>
-                  </a>
-                </li>
-                <li>
-                  <a href='#agents'>
-                    Agents<span className='num'>12</span>
-                  </a>
-                </li>
-                <li>
-                  <a href='#labs'>
-                    Labs<span className='num'>05</span>
-                  </a>
-                </li>
-                <li>
-                  <a href='#contact'>Contact</a>
-                </li>
-              </ul>
-            </nav>
-            <div className='nav-side'>
-              <a className='nav-cta' href={REPO} {...ext}>
-                Star · 0K
-              </a>
-              <span className='status-dot' aria-hidden='true' />
-            </div>
-          </div>
-        </header>
+        {/* Headroom-style sticky header with live GitHub star count. */}
+        <Header />
 
         {/* ====== HERO ====== */}
         <section className='hero' id='top' data-od-id='hero'>
