@@ -127,8 +127,12 @@ function injectSandboxShim(doc: string): string {
 //        element, or all if elementId is omitted.
 //   in:  { type: 'od:inspect-extract' } Reply with the cumulative
 //        override map so the host can persist to source.
-//   out: { type: 'od:inspect-overrides', overrides, css } The current
-//        snapshot, sent in reply to extract and after every set/reset.
+//   out: { type: 'od:inspect-overrides', overrides } The current snapshot,
+//        sent in reply to extract and after every set/reset. The host
+//        re-derives the persisted CSS body from the structured map under
+//        its own allow-list — the bridge's own stylesheet text is NOT
+//        included in this message because artifact JS can forge a
+//        same-source od:inspect-overrides containing a hostile `css`.
 //
 // Overrides are written into a single <style data-od-inspect-overrides>
 // block in <head>, with `!important` on every property so the bridge
@@ -261,9 +265,13 @@ function injectSelectionBridge(
         clean[id] = { selector: entry.selector, props: Object.assign({}, entry.props) };
       }
     });
-    var css = '';
-    if (styleEl && styleEl.textContent) css = styleEl.textContent;
-    try { window.parent.postMessage({ type: 'od:inspect-overrides', overrides: clean, css: css }, '*'); } catch (_) {}
+    // Intentionally do NOT include a css string here. Artifact code
+    // running inside this iframe shares window.parent and could forge
+    // od:inspect-overrides with a hostile css (e.g. </style><script>...).
+    // The host re-derives CSS from the structured overrides map under
+    // its own allow-list, so any stray css field on the wire would only
+    // be a false-trust trap.
+    try { window.parent.postMessage({ type: 'od:inspect-overrides', overrides: clean }, '*'); } catch (_) {}
   }
   function styleSnapshot(el){
     try {

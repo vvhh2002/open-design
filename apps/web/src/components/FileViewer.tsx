@@ -493,6 +493,86 @@ function InspectPanel({
   );
 }
 
+// Inspect-mode override map as it travels in od:inspect-overrides messages.
+// The bridge inside the iframe is the legitimate sender, but artifact code
+// rendered with scripts enabled can also call window.parent.postMessage with
+// a forged payload — ev.source still points at iframe.contentWindow. Treat
+// every field here as untrusted: the host re-derives the persisted CSS from
+// this structured map under its own allow-list, ignoring any sibling `css`.
+type InspectOverridePayload = {
+  selector?: unknown;
+  props?: unknown;
+};
+
+// Allow-list of CSS properties the host will persist on Save. Mirrors the
+// in-iframe ALLOWED_PROPS list so the host doesn't accept properties that
+// the bridge itself would reject.
+const HOST_ALLOWED_INSPECT_PROPS = new Set([
+  'color',
+  'background-color',
+  'font-size',
+  'font-weight',
+  'font-family',
+  'line-height',
+  'text-align',
+  'padding',
+  'padding-top',
+  'padding-right',
+  'padding-bottom',
+  'padding-left',
+  'border-radius',
+]);
+
+// Reject values that could break out of `prop: value` and into the
+// surrounding <style> block — semicolons, braces, angle brackets, and
+// newlines. Mirrors the bridge's UNSAFE_VALUE regex.
+const HOST_UNSAFE_INSPECT_VALUE = /[;{}<>\n\r]/;
+
+// elementIds we'll splice into a `[data-od-id="..."]` selector. Restrict to
+// characters that are unambiguously safe inside a double-quoted CSS attr
+// value: alphanumerics, dash, underscore, colon, and dot. Anything else
+// (quote, backslash, angle bracket, whitespace) is rejected outright.
+const HOST_SAFE_INSPECT_ID = /^[A-Za-z0-9_\-:.]+$/;
+
+// Build the inspect overrides CSS body the host will persist, from the
+// structured `overrides` field of an od:inspect-overrides message. The host
+// MUST NOT trust the sibling `css` string — it is attacker-controlled when
+// artifact JS forges the message. The selector is re-derived from each
+// elementId; only allow-listed properties with safe values survive.
+//
+// Exported so unit tests can exercise the validator with hostile payloads.
+export function serializeInspectOverrides(overrides: unknown): string {
+  if (!overrides || typeof overrides !== 'object') return '';
+  const map = overrides as Record<string, unknown>;
+  const lines: string[] = [];
+  for (const elementId of Object.keys(map)) {
+    if (!HOST_SAFE_INSPECT_ID.test(elementId)) continue;
+    const entry = map[elementId] as InspectOverridePayload | null | undefined;
+    if (!entry || typeof entry !== 'object') continue;
+    const props = entry.props;
+    if (!props || typeof props !== 'object') continue;
+    // The bridge tags entries it built from data-screen-label with a
+    // matching selector; respect that signal but never let the inbound
+    // selector string itself reach the persisted body.
+    const attr = entry.selector === `[data-screen-label="${elementId}"]`
+      ? 'data-screen-label'
+      : 'data-od-id';
+    const safeSelector = `[${attr}="${elementId}"]`;
+    const decls: string[] = [];
+    for (const [rawName, rawValue] of Object.entries(props as Record<string, unknown>)) {
+      if (typeof rawName !== 'string' || typeof rawValue !== 'string') continue;
+      const name = rawName.toLowerCase();
+      if (!HOST_ALLOWED_INSPECT_PROPS.has(name)) continue;
+      const value = rawValue.trim();
+      if (!value || HOST_UNSAFE_INSPECT_VALUE.test(value)) continue;
+      decls.push(`${name}: ${value} !important`);
+    }
+    if (!decls.length) continue;
+    lines.push(`${safeSelector} { ${decls.join('; ')} }`);
+  }
+  return lines.join('\n');
+}
+
 // Splice (or remove) the inspect overrides <style> block in an HTML
 // document. Idempotent: calling with the same css produces the same
 // document. Empty css strips the block entirely.
@@ -1075,14 +1155,18 @@ function HtmlViewer({
   }, [inspectMode]);
 
   // Listen for the iframe's accumulated overrides snapshot — host needs the
-  // raw CSS body to splice into the source on Save.
+  // CSS body to splice into the source on Save. Artifact code rendered with
+  // scripts enabled shares the same iframe.contentWindow as the bridge, so
+  // ev.source alone does not establish trust: the host re-derives the CSS
+  // from the structured `overrides` map under its own allow-list and never
+  // persists the sibling `css` string supplied in the message.
   useEffect(() => {
     if (!inspectMode) return;
     function onMessage(ev: MessageEvent) {
       if (ev.source !== iframeRef.current?.contentWindow) return;
-      const data = ev.data as { type?: string; css?: string } | null;
+      const data = ev.data as { type?: string; overrides?: unknown } | null;
       if (!data || data.type !== 'od:inspect-overrides') return;
-      setInspectOverridesCss(typeof data.css === 'string' ? data.css : '');
+      setInspectOverridesCss(serializeInspectOverrides(data.overrides));
     }
     window.addEventListener('message', onMessage);
     return () => window.removeEventListener('message', onMessage);
@@ -1225,9 +1309,11 @@ function HtmlViewer({
       }
       function onMessage(ev: MessageEvent) {
         if (ev.source !== iframeRef.current?.contentWindow) return;
-        const data = ev.data as { type?: string; css?: string } | null;
+        const data = ev.data as { type?: string; overrides?: unknown } | null;
         if (!data || data.type !== 'od:inspect-overrides') return;
-        finish(typeof data.css === 'string' ? data.css : '');
+        // Same defense as the persistent listener above: re-derive CSS from
+        // the structured map; never persist the inbound `css` string.
+        finish(serializeInspectOverrides(data.overrides));
       }
       window.addEventListener('message', onMessage);
       const timer = window.setTimeout(() => finish(inspectOverridesCss), timeoutMs);
