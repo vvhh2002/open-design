@@ -1,13 +1,21 @@
 /*
- * Atelier Zero — landing page styles.
+ * Atelier Zero — canonical landing-page stylesheet.
  *
- * Mirrors `skills/editorial-collage/example.html` <style> block 1:1, plus
- * a Google Fonts import so we do not need to inject <link rel='preconnect'>
- * tags into the document head from a server component.
+ * This file is the SINGLE SOURCE OF TRUTH for the editorial-collage
+ * skill's visual system. It is consumed by:
  *
- * When the canonical example.html changes, mirror the diff here. The two
- * files are intentionally kept in lockstep for visual parity between the
- * skill's known-good rendering and the deployed landing page.
+ *   1. `scripts/compose.ts` — inlined into the standalone HTML output.
+ *   2. `apps/landing-page/app/globals.css` — copied verbatim for the
+ *      Next.js deployable counterpart.
+ *   3. `example.html` — the pre-rendered known-good demo.
+ *
+ * If you change tokens, layout, motion, or component styles, edit them
+ * here. The `@import` at top loads the four Google fonts the system
+ * requires (Inter Tight, Inter, Playfair Display, JetBrains Mono).
+ *
+ * Tokens, grid posture, and motion language are defined by
+ * `design-systems/atelier-zero/DESIGN.md`. Do not invent new colors or
+ * typefaces here; either extend the design system first.
  */
 @import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,400;1,500;1,600;1,700&family=JetBrains+Mono:wght@400;500&display=swap');
 
@@ -35,36 +43,16 @@
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html, body {
-  background: var(--paper);
-  color: var(--ink);
-  /*
-   * Lock the page width to the viewport so any decorative element
-   * positioned with negative offsets (ribbons, hero-art margin-right,
-   * mega footer word, etc.) cannot create a horizontal scrollbar on
-   * narrow viewports.
-   *
-   * Use `overflow-x: clip` (modern) instead of `hidden`: clip does not
-   * establish a containing block for `position: fixed/sticky`, so the
-   * sticky nav keeps working. Browsers that don't support clip fall
-   * back to the hidden declaration just above it.
-   */
-  overflow-x: hidden;
-  overflow-x: clip;
-  max-width: 100%;
-}
-html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+html, body { background: var(--paper); color: var(--ink); }
 body {
   font-family: var(--body);
   font-size: 16px;
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
   position: relative;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
 }
-img, video, canvas { max-width: 100%; height: auto; }
 
 /* paper texture overlay across the whole page */
 body::before {
@@ -292,21 +280,6 @@ body::before {
   content: '★';
   color: var(--mustard);
   font-size: 11px;
-}
-.nav-cta.ghost {
-  background: transparent;
-  color: var(--ink);
-  border: 1px solid rgba(21, 20, 15, 0.18);
-  transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
-}
-.nav-cta.ghost:hover {
-  background: rgba(21, 20, 15, 0.04);
-  border-color: rgba(21, 20, 15, 0.36);
-}
-.nav-cta.ghost::after {
-  content: '↓';
-  color: var(--ink);
-  font-size: 12px;
 }
 .status-dot {
   width: 28px; height: 28px;
@@ -703,20 +676,8 @@ section.tight { padding: 90px 0; }
 }
 .wire-row {
   overflow: hidden;
-  mask-image: linear-gradient(
-    90deg,
-    transparent,
-    black 5%,
-    black 95%,
-    transparent
-  );
-  -webkit-mask-image: linear-gradient(
-    90deg,
-    transparent,
-    black 5%,
-    black 95%,
-    transparent
-  );
+  mask-image: linear-gradient(90deg, transparent, black 5%, black 95%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, black 5%, black 95%, transparent);
 }
 .marquee-track {
   display: inline-flex;
@@ -735,12 +696,8 @@ section.tight { padding: 90px 0; }
   animation-play-state: paused;
 }
 @keyframes marquee-x {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 .wire-item {
   display: inline-flex;
@@ -792,9 +749,7 @@ section.tight { padding: 90px 0; }
   color: var(--coral);
 }
 @media (prefers-reduced-motion: reduce) {
-  .marquee-track {
-    animation: none;
-  }
+  .marquee-track { animation: none; }
 }
 
 /* ---------- ABOUT ---------- */
@@ -1663,38 +1618,6 @@ footer {
   line-height: 1.55;
   max-width: 38ch;
 }
-.foot-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 22px;
-  padding: 11px 18px;
-  border-radius: 999px;
-  background: var(--ink);
-  color: var(--paper);
-  font-family: var(--sans);
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: -0.005em;
-  text-decoration: none;
-  transition: transform 160ms ease, background 160ms ease;
-}
-.foot-cta:hover {
-  transform: translateY(-1px);
-  background: var(--ink-soft);
-}
-.foot-cta::after {
-  content: '↓';
-  color: var(--mustard);
-  font-size: 12px;
-}
-.foot-cta .meta {
-  color: rgba(239, 231, 210, 0.55);
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  margin-left: 4px;
-}
 .foot-brand p .inline-link,
 .inline-link {
   color: var(--ink);
@@ -1863,19 +1786,7 @@ footer {
   .nav { transition: none !important; }
 }
 
-/* ---------- responsive ----------
- *
- * Breakpoint ladder:
- *   1280  — desktop chrome shrinks (drop side rails, slimmer container).
- *   1200  — topbar mid label crowds first, hide it.
- *   1080  — small desktop / large laptop. Smaller hero/section heads.
- *    880  — tablet portrait. Stack two-column grids, tame the dark work
- *           card, trim partners to 3 cols.
- *    640  — large phone landscape. Wrap toolbars, trim foot-mega.
- *    560  — phone portrait. One-column lists/cards. Hero shrinks again.
- *    420  — tiny phones. Drop decorative ribbons that overflow, shrink
- *           the locale switcher, tighten section padding.
- */
+/* responsive */
 @media (max-width: 1280px) {
   .container { padding: 0 44px; }
   .work { margin: 0 44px; padding: 90px 44px; }
@@ -1894,36 +1805,21 @@ footer {
   .foot-grid { grid-template-columns: 2fr 1fr 1fr; }
   .foot-grid .foot-col:nth-child(4),
   .foot-grid .foot-col:nth-child(5) { display: none; }
-  .work { padding: 80px 40px; }
-  .work-arrows { right: 32px; bottom: 32px; }
 }
 @media (max-width: 880px) {
   .container { padding: 0 24px; }
-  /* stack two-column grids */
   .hero-grid, .about-grid, .capabilities-grid, .testimonial-grid, .cta-grid {
     grid-template-columns: 1fr;
     gap: 50px;
   }
-  .labs-head, .method-head { grid-template-columns: 1fr; gap: 28px; }
-  .labs-meta { justify-content: flex-start; }
-  .pills { justify-content: flex-start; }
+  .labs-head, .method-head { grid-template-columns: 1fr; }
   .labs-grid { grid-template-columns: repeat(2, 1fr); }
   .method-grid { grid-template-columns: repeat(2, 1fr); gap: 36px; }
   .method-grid::before { display: none; }
-  /* hero — copy first, art second; trim art height so the page isn't 200vh */
-  .hero { min-height: 0; padding: 32px 0 0; }
-  .hero::before { display: none; }
-  .hero-grid { gap: 36px; }
-  .hero-copy { padding: 18px 0 8px; }
-  .hero-copy .lead { max-width: none; }
-  .hero-art { height: auto; aspect-ratio: 4 / 5; max-height: none; margin: 0 -8px 0 0; }
-  .hero-actions { flex-wrap: wrap; }
-  .hero-stats { flex-wrap: wrap; gap: 14px 22px; }
-  .hero-foot { flex-wrap: wrap; gap: 12px 24px; padding-top: 18px; }
-  .sec-rule { flex-wrap: wrap; gap: 8px 18px; }
-  .sec-rule .meta-grp { gap: 18px; flex-wrap: wrap; }
-  .section-header { margin-bottom: 48px; }
-  .section-header h2 { max-width: none; }
+  .work { margin: 0 12px; padding: 60px 24px; }
+  .work-grid { grid-template-columns: 1fr; }
+  .partners { grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .nav-links, .brand-meta, .nav-cta { display: none; }
   /* wire — stack the field label above the marquee rows */
   .wire-inner { grid-template-columns: 1fr; gap: 14px; }
   .wire-left {
@@ -1933,92 +1829,13 @@ footer {
     padding-bottom: 12px;
     min-height: 0;
   }
-  /* about copy first */
-  .about-art { max-width: 460px; margin: 0 auto; }
-  .about-side-note { display: none; }
-  .about-caption { right: 12px; }
-  .about .footer-row { flex-wrap: wrap; gap: 14px 20px; margin-top: 36px; }
-  /* capabilities */
-  .capabilities-art { max-width: 460px; margin: 0 auto; }
-  .capabilities-art .ribbon { display: none; }
-  /* method */
-  .method-step .num { font-size: 56px; margin-bottom: 16px; }
-  .method-step h4 { font-size: 24px; padding-right: 0; }
-  .method-foot { flex-direction: column; align-items: flex-start; gap: 14px; padding-top: 18px; margin-top: 56px; }
-  /* dark work card */
-  .work { margin: 0 12px; padding: 60px 24px; border-radius: 24px; }
-  .work-grid { grid-template-columns: 1fr; gap: 36px; }
-  .work-arrows { position: static; margin-top: 32px; }
-  .work-card,
-  .work-card.alt { transform: none; }
-  .work-card:hover { transform: translateY(-3px); }
-  .work-card.alt:hover { transform: translateY(-3px); }
-  /* testimonial / partners */
-  .testimonial-art { max-width: 420px; margin: 0 auto; }
-  .partners { grid-template-columns: repeat(3, 1fr); gap: 18px; }
-  /* cta */
-  .cta-art { max-width: 460px; margin: 0 auto; }
-  .cta-art .ribbon { display: none; }
-  .cta-actions { flex-wrap: wrap; }
-  .cta-foot { flex-wrap: wrap; gap: 14px 24px; }
-  /* footer */
-  .foot-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
-  .foot-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
-  .foot-bottom .right { flex-wrap: wrap; gap: 12px 20px; }
-  /* nav */
-  .nav { padding: 16px 0; }
-  .nav-links, .brand-meta, .nav-cta { display: none; }
-}
-@media (max-width: 640px) {
-  .topbar-inner { gap: 14px; }
-  .topbar-inner .right { gap: 12px; }
-  .hero-actions .btn { padding: 12px 18px; font-size: 13px; }
-  .work-card h3 { font-size: clamp(24px, 6vw, 30px); }
-  .foot-mega .word { font-size: clamp(54px, 18vw, 120px); }
 }
 @media (max-width: 560px) {
   .container { padding: 0 16px; }
-  .hero h1 { font-size: clamp(34px, 9.5vw, 44px); }
-  .about h2,
-  .capabilities-copy h2,
-  .labs-head h2,
-  .method-head h2,
-  .testimonial-copy h2,
-  .cta h2,
-  .section-header h2 { font-size: clamp(30px, 8.5vw, 44px); }
-  .cta h2 { font-size: clamp(34px, 10vw, 54px); }
+  .hero h1 { font-size: 38px; }
   .labs-grid { grid-template-columns: 1fr; }
   .cards { grid-template-columns: 1fr; }
-  .method-grid { grid-template-columns: 1fr; gap: 28px; }
-  .method-step .num { font-size: 48px; }
-  .method-step h4 { font-size: 22px; }
+  .pills { justify-content: flex-start; }
   section { padding: 80px 0; }
-  .topbar-inner { font-size: 9px; gap: 10px; }
-  .topbar-inner .right { gap: 10px; }
-  .partners { grid-template-columns: repeat(2, 1fr); gap: 14px; }
-  .foot-grid { grid-template-columns: 1fr; gap: 24px; }
-  .work { margin: 0 8px; padding: 48px 20px; border-radius: 20px; }
-  .hero-actions { width: 100%; }
-  .hero-actions .btn { flex: 1 1 auto; justify-content: center; }
-  .cta-actions { width: 100%; }
-  .cta-actions .btn,
-  .cta-actions .email-pill { flex: 1 1 auto; justify-content: center; }
-  .nav-inner { gap: 12px; }
-  .brand { font-size: 16px; gap: 10px; }
-  .brand-mark { width: 32px; height: 32px; font-size: 16px; }
-  .read-more { margin-top: 36px; }
-  .foot-mega .word { font-size: clamp(48px, 16vw, 88px); }
-}
-@media (max-width: 420px) {
-  .container { padding: 0 14px; }
-  /* topbar — drop the locale switcher tail; keep version pill + brand */
-  .topbar-inner .right > a:nth-of-type(n + 3) { display: none; }
-  .hero-stats { gap: 10px 16px; }
-  .hero-stats .stat { font-size: 11px; }
-  .hero-foot { font-size: 9.5px; }
-  .sec-rule { font-size: 9.5px; gap: 6px 12px; }
-  .partners { grid-template-columns: repeat(2, 1fr); }
-  .foot-mega .word { font-size: clamp(40px, 16vw, 64px); }
-  .work-card { padding: 26px 22px; }
-  .work-card.alt { padding: 24px 20px; }
+  .topbar-inner { font-size: 9px; }
 }

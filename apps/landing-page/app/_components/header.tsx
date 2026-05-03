@@ -165,6 +165,15 @@ export function Header() {
         </nav>
         <div className='nav-side'>
           <a
+            className='nav-cta ghost'
+            href={REPO_RELEASES}
+            aria-label='Download Open Design desktop'
+            title='Download the desktop app'
+            {...ext}
+          >
+            Download
+          </a>
+          <a
             className='nav-cta'
             href={REPO}
             aria-label={`Star Open Design on GitHub — ${starLabel} stars`}

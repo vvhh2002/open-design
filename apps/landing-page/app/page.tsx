@@ -43,13 +43,66 @@ const LINEAGE = {
   'guizang-ppt': 'https://github.com/op7418/guizang-ppt-skill',
   'multica-ai': 'https://github.com/multica-ai/multica',
   'open-codesign': 'https://github.com/OpenCoworkAI/open-codesign',
-  'claude-code': 'https://www.anthropic.com/claude-code',
+  'devin-cli': 'https://devin.ai/terminal',
+  hyperframes: 'https://github.com/heygen-com/hyperframes',
 } as const;
 
 const ext = {
   target: '_blank',
   rel: 'noreferrer noopener',
 } as const;
+
+// Global wire — cities the studio is composed from + named contributors
+// behind the lineage projects. Both lists feed counter-scrolling
+// marquees in the editorial ticker between the hero and the About
+// section. Keep coordinates rough to fit the editorial register.
+const WIRE_CITIES = [
+  { name: 'Berlin', coord: '52.52°N' },
+  { name: 'Tokyo', coord: '35.68°N' },
+  { name: 'Shanghai', coord: '31.23°N' },
+  { name: 'Beijing', coord: '39.90°N' },
+  { name: 'Taipei', coord: '25.03°N' },
+  { name: 'Singapore', coord: '1.35°N' },
+  { name: 'Bangalore', coord: '12.97°N' },
+  { name: 'Dubai', coord: '25.20°N' },
+  { name: 'Lagos', coord: '6.52°N' },
+  { name: 'Nairobi', coord: '1.29°S' },
+  { name: 'Cape Town', coord: '33.92°S' },
+  { name: 'Lisbon', coord: '38.72°N' },
+  { name: 'Madrid', coord: '40.42°N' },
+  { name: 'Paris', coord: '48.86°N' },
+  { name: 'London', coord: '51.51°N' },
+  { name: 'Amsterdam', coord: '52.37°N' },
+  { name: 'Stockholm', coord: '59.33°N' },
+  { name: 'Toronto', coord: '43.65°N' },
+  { name: 'New York', coord: '40.71°N' },
+  { name: 'San Francisco', coord: '37.77°N' },
+  { name: 'Mexico City', coord: '19.43°N' },
+  { name: 'São Paulo', coord: '23.55°S' },
+  { name: 'Sydney', coord: '33.87°S' },
+] as const;
+
+const WIRE_CONTRIBS = [
+  { handle: 'tw93', role: 'kami', href: 'https://github.com/tw93' },
+  { handle: 'op7418', role: 'guizang', href: 'https://github.com/op7418' },
+  {
+    handle: 'alchaincyf',
+    role: 'huashu',
+    href: 'https://github.com/alchaincyf',
+  },
+  {
+    handle: 'multica-ai',
+    role: 'daemon',
+    href: 'https://github.com/multica-ai',
+  },
+  {
+    handle: 'OpenCoworkAI',
+    role: 'codesign',
+    href: 'https://github.com/OpenCoworkAI',
+  },
+  { handle: 'nexu-io', role: 'studio', href: 'https://github.com/nexu-io' },
+  { handle: 'you', role: 'be next', href: REPO_CONTRIBUTORS },
+] as const;
 
 export default function Page() {
   return (
@@ -83,10 +136,22 @@ export default function Page() {
             <span className='right'>
               <a className='topbar-link' href={REPO_RELEASES} {...ext}>
                 <span className='pulse' />
-                Live · v0.4.6
+                Live · v0.2.0
               </a>
-              <span>
-                <b>EN</b> · DE · 中文 · 日本語
+              <span className='locale-switch'>
+                <b>EN</b>
+                {' · '}
+                <a className='topbar-link' href={REPO} {...ext} title='Localization in progress — open the repo on GitHub'>
+                  DE
+                </a>
+                {' · '}
+                <a className='topbar-link' href={REPO} {...ext} title='Localization in progress — open the repo on GitHub'>
+                  中文
+                </a>
+                {' · '}
+                <a className='topbar-link' href={REPO} {...ext} title='Localization in progress — open the repo on GitHub'>
+                  日本語
+                </a>
               </span>
             </span>
           </div>
@@ -182,6 +247,65 @@ export default function Page() {
                 <span>
                   <span className='n'>04</span>Deliver
                 </span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ====== WIRE / GLOBAL TICKER ====== */}
+        {/*
+         * Slim editorial ticker between the hero and About. Two
+         * counter-scrolling marquees signal that the project is
+         * global (cities, top row) and contributor-driven
+         * (handles, bottom row). Pure CSS animation; the track
+         * content is doubled in markup so the loop wraps seamlessly.
+         */}
+        <section
+          className='wire'
+          data-od-id='wire'
+          aria-label='Global wire — cities and contributors'
+        >
+          <div className='container wire-inner'>
+            <div className='wire-left'>
+              <span className='wire-mark' aria-hidden='true'>
+                <span className='wire-pulse' />
+              </span>
+              <span className='wire-title'>
+                <b>From the field</b>
+                <span>
+                  Open · {WIRE_CITIES.length} cities ·{' '}
+                  {WIRE_CONTRIBS.length - 1} contributors
+                </span>
+              </span>
+            </div>
+            <div className='wire-rows'>
+              <div className='wire-row'>
+                <div className='marquee-track' aria-hidden='true'>
+                  {[...WIRE_CITIES, ...WIRE_CITIES].map((c, i) => (
+                    <span className='wire-item' key={`city-${i}`}>
+                      <span className='wire-dot'>·</span>
+                      <span className='wire-coord'>{c.coord}</span>
+                      <span className='wire-name'>{c.name}</span>
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className='wire-row reverse'>
+                <div className='marquee-track'>
+                  {[...WIRE_CONTRIBS, ...WIRE_CONTRIBS].map((c, i) => (
+                    <a
+                      className='wire-item is-link'
+                      key={`contrib-${i}`}
+                      href={c.href}
+                      aria-label={`Open ${c.handle} on GitHub`}
+                      {...ext}
+                    >
+                      <span className='wire-dot'>·</span>
+                      <span className='wire-handle'>@{c.handle}</span>
+                      <span className='wire-role'>{c.role}</span>
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -723,25 +847,26 @@ export default function Page() {
               <a
                 className='work-card alt'
                 data-reveal
-                href={`${REPO_SKILLS}/dating-web`}
+                href='https://github.com/tw93/kami'
                 {...ext}
               >
                 <div className='label-row'>
-                  <span className='small-label'>Companion</span>
-                  <span className='index'>04 / 31</span>
+                  <span className='small-label'>Companion system</span>
+                  <span className='index'>04 / 72</span>
                 </div>
-                <h3>dating-web</h3>
+                <h3>kami</h3>
                 <p>
-                  A consumer dashboard reference, ticker bar, KPIs, editorial
-                  typography.
+                  An editorial paper system. Warm parchment canvas, ink-blue
+                  accent, serif-led hierarchy — multilingual by design (EN ·
+                  zh-CN · ja).
                 </p>
                 <div className='img'>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src='/assets/work-2.png' alt='' />
                 </div>
                 <div className='meta-row'>
-                  <span className='year'>2026 · WEB</span>
-                  <span>PROTOTYPE</span>
+                  <span className='year'>2026 · PAPER</span>
+                  <span>SYSTEM</span>
                 </div>
               </a>
             </div>
@@ -893,7 +1018,7 @@ export default function Page() {
                   <a
                     className='partner'
                     data-reveal
-                    href={LINEAGE['claude-code']}
+                    href={LINEAGE['devin-cli']}
                     {...ext}
                   >
                     <div className='glyph'>
@@ -903,11 +1028,31 @@ export default function Page() {
                         stroke='currentColor'
                         strokeWidth='2'
                       >
-                        <path d='M8 6L8 24M22 6L22 24M8 15h14' />
+                        <path d='M5 8l9 7-9 7M20 24h18' />
                       </svg>
                     </div>
-                    <span>Claude Code</span>
-                    <small>Skills.md</small>
+                    <span>Devin CLI</span>
+                    <small>Terminal</small>
+                  </a>
+                  <a
+                    className='partner'
+                    data-reveal
+                    href={LINEAGE['hyperframes']}
+                    {...ext}
+                  >
+                    <div className='glyph'>
+                      <svg
+                        viewBox='0 0 80 30'
+                        fill='none'
+                        stroke='currentColor'
+                        strokeWidth='2'
+                      >
+                        <rect x='4' y='5' width='22' height='18' />
+                        <rect x='14' y='9' width='22' height='18' />
+                      </svg>
+                    </div>
+                    <span>hyperframes</span>
+                    <small>Frames</small>
                   </a>
                 </div>
                 <a className='read-more' href={REPO} {...ext}>
@@ -960,7 +1105,7 @@ export default function Page() {
                 </div>
                 <div className='cta-foot'>
                   <span className='stamp'>● Live</span>
-                  <span>v0.4.6 / Apache-2.0</span>
+                  <span>v0.2.0 / Apache-2.0</span>
                   <span style={{ marginLeft: 'auto' }}>
                     52.5200° N · 13.4050° E
                   </span>
@@ -1023,6 +1168,15 @@ export default function Page() {
                   </a>
                   .
                 </p>
+                <a
+                  className='foot-cta'
+                  href={REPO_RELEASES}
+                  aria-label='Download the Open Design desktop app'
+                  {...ext}
+                >
+                  Download desktop
+                  <span className='meta'>macOS · v0.2.0</span>
+                </a>
               </div>
               <div className='foot-col'>
                 <h5>Studio</h5>
