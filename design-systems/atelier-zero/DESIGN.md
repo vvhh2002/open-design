@@ -23,6 +23,24 @@ restrained — never noisy, never neon.
 - **Mood:** intelligent, tactile, slightly poetic, unmistakably
   international.
 
+### Print production references
+
+The three magazines are not interchangeable inspiration — each owns a
+specific dimension of the system. When a brief asks "shift it closer to
+X", consult this map before changing tokens:
+
+- **Monocle:** warm paper stock (`#efe7d2`), tight body leading (~1.55),
+  monospace coordinates and SHA stamps, the international metadata
+  strip ("Filed under …"), the small ★ in the nav.
+- **Apartamento:** surreal collage composition (plaster + architecture
+  + small human figure), torn-edge textures inside the imagery, the
+  rotated side notes, and the willingness to leave generous negative
+  space around an image.
+- **IDEA:** Roman-numeral section walks (I → VIII), oversized
+  italic-serif words mixed inline with bold sans (Playfair Italic 500
+  inside Inter Tight 800), hairline rules threading through method
+  steps, the closing mega-word footer.
+
 ## 2. Color
 
 All values are tokens. Do not invent new hex.
@@ -50,6 +68,18 @@ All values are tokens. Do not invent new hex.
 - Pure white (`#fff`) only inside the dark "selected work" panel as
   inverse text. Never on Paper.
 - Pure black is forbidden. The darkest value is `Ink #15140f`.
+
+### Why single-accent (not multi-accent)
+
+Multi-accent editorial systems (e.g. *The New Yorker* using red for
+Opinion and teal for Culture) work when the publication has stable
+content categories and a long-term reader who learns the code. A
+single-shot studio landing page does not have that runway. One coral
+moment per ~600vh forces the agent to pick the single most important
+beat per viewport instead of balancing two chromatic hierarchies, and
+keeps the page calibrated to the warm-paper canvas. Mustard and olive
+exist as **jewelry** (≤1% surface area: a star, a dot, a partner glyph)
+— never as semantic signals, and never as CTA fills.
 
 ### Surface noise
 
@@ -210,6 +240,25 @@ the page-of-008 counter on the right.
   monospace annotation.
 - ❌ No Roman numeral skipped — sections must be sequential.
 - ❌ No pure white, no pure black, no pure 100%-saturation accent.
+
+### Anti-patterns specific to AI-generated imagery
+
+This system is paired with `gpt-image-fal` / `gpt-image-azure` via the
+editorial-collage skill. Several common image-model defaults will
+silently break the Atelier Zero aesthetic, so they are forbidden in
+every collage prompt and rejected on visual review:
+
+- ❌ No lens flares, light leaks, bloom, or cinematic post-FX. The
+  paper-and-museum mood is matte, not cinematic.
+- ❌ No glitch, datamosh, RGB-split, or scanline artifacts.
+- ❌ No photorealistic human faces or stock-portrait people. Plaster
+  fragments, busts, and small scale figures only — eyes never look at
+  the viewer.
+- ❌ No visible AI signatures, watermarks, generator logos, or
+  hallucinated model captions. The rendered surface must read as a
+  printed page, not a model output.
+- ❌ No DSLR-style shallow depth-of-field bokeh on the collage
+  fragments — every plane stays in focus.
 
 ## 10. Responsive Behavior
 

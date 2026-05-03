@@ -7,10 +7,10 @@
     {
       "id": "hero",
       "file": "hero.png",
-      "width": 1536,
+      "width": 1024,
       "height": 1024,
-      "ratio": "16:9",
-      "prompt_section": "hero.png — 16:9",
+      "ratio": "1:1",
+      "prompt_section": "hero.png — 1:1",
       "required": true,
       "rekey_on_brand_change": true
     },
@@ -37,8 +37,8 @@
     {
       "id": "method-1",
       "file": "method-1.png",
-      "width": 1024,
-      "height": 1024,
+      "width": 816,
+      "height": 816,
       "ratio": "1:1",
       "prompt_section": "method-1 (Detect)",
       "required": true,
@@ -47,8 +47,8 @@
     {
       "id": "method-2",
       "file": "method-2.png",
-      "width": 1024,
-      "height": 1024,
+      "width": 816,
+      "height": 816,
       "ratio": "1:1",
       "prompt_section": "method-2 (Discover)",
       "required": true,
@@ -57,8 +57,8 @@
     {
       "id": "method-3",
       "file": "method-3.png",
-      "width": 1024,
-      "height": 1024,
+      "width": 816,
+      "height": 816,
       "ratio": "1:1",
       "prompt_section": "method-3 (Direct)",
       "required": true,
@@ -67,8 +67,8 @@
     {
       "id": "method-4",
       "file": "method-4.png",
-      "width": 1024,
-      "height": 1024,
+      "width": 816,
+      "height": 816,
       "ratio": "1:1",
       "prompt_section": "method-4 (Deliver)",
       "required": true,
@@ -77,9 +77,9 @@
     {
       "id": "lab-1",
       "file": "lab-1.png",
-      "width": 1024,
-      "height": 1280,
-      "ratio": "4:5",
+      "width": 768,
+      "height": 1024,
+      "ratio": "3:4",
       "prompt_section": "lab-1 (Magazine Decks)",
       "required": true,
       "rekey_on_brand_change": false
@@ -87,9 +87,9 @@
     {
       "id": "lab-2",
       "file": "lab-2.png",
-      "width": 1024,
-      "height": 1280,
-      "ratio": "4:5",
+      "width": 768,
+      "height": 1024,
+      "ratio": "3:4",
       "prompt_section": "lab-2 (Synthetic Matter)",
       "required": true,
       "rekey_on_brand_change": false
@@ -97,9 +97,9 @@
     {
       "id": "lab-3",
       "file": "lab-3.png",
-      "width": 1024,
-      "height": 1280,
-      "ratio": "4:5",
+      "width": 768,
+      "height": 1024,
+      "ratio": "3:4",
       "prompt_section": "lab-3 (Prompt Choreography)",
       "required": true,
       "rekey_on_brand_change": false
@@ -107,9 +107,9 @@
     {
       "id": "lab-4",
       "file": "lab-4.png",
-      "width": 1024,
-      "height": 1280,
-      "ratio": "4:5",
+      "width": 768,
+      "height": 1024,
+      "ratio": "3:4",
       "prompt_section": "lab-4 (Visual Reasoning)",
       "required": true,
       "rekey_on_brand_change": false
@@ -117,9 +117,9 @@
     {
       "id": "lab-5",
       "file": "lab-5.png",
-      "width": 1024,
-      "height": 1280,
-      "ratio": "4:5",
+      "width": 768,
+      "height": 1024,
+      "ratio": "3:4",
       "prompt_section": "lab-5 (Soft Systems)",
       "required": true,
       "rekey_on_brand_change": false
@@ -127,9 +127,9 @@
     {
       "id": "work-1",
       "file": "work-1.png",
-      "width": 1280,
+      "width": 768,
       "height": 1024,
-      "ratio": "4:3",
+      "ratio": "3:4",
       "prompt_section": "work-1 (Featured)",
       "required": true,
       "rekey_on_brand_change": true
@@ -137,9 +137,9 @@
     {
       "id": "work-2",
       "file": "work-2.png",
-      "width": 1280,
+      "width": 768,
       "height": 1024,
-      "ratio": "4:3",
+      "ratio": "3:4",
       "prompt_section": "work-2 (Companion)",
       "required": true,
       "rekey_on_brand_change": true
@@ -152,7 +152,7 @@
       "ratio": "1:1",
       "prompt_section": "testimonial.png — 1:1",
       "required": true,
-      "rekey_on_brand_change": false
+      "rekey_on_brand_change": true
     },
     {
       "id": "cta",
