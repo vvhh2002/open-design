@@ -115,22 +115,22 @@ export default function Page() {
         <section className='hero' id='top' data-od-id='hero'>
           <div className='container hero-grid'>
             <div className='hero-copy'>
-              <span className='label'>
+              <span className='label' data-reveal>
                 Open-source design studio <span className='ix'>· Nº 01</span>
               </span>
-              <h1 className='display'>
+              <h1 className='display' data-reveal>
                 Designing <em>intelligence</em> with skills, <em>taste,</em> and{' '}
                 <em>code</em>
                 <span className='dot'>.</span>
               </h1>
-              <p className='lead'>
-                Open Design is the open-source alternative to Claude Design. 12
-                coding-agent CLIs auto-detected on your{' '}
-                <code className='code-inline'>$PATH</code>, driven by 31
-                composable skills and 72 brand-grade design systems. Local-first,
-                web-deployable, BYOK at every layer.
+              <p className='lead' data-reveal>
+                The open-source alternative to Anthropic&rsquo;s Claude Design.
+                12 coding agents — Claude, Codex, Cursor, Gemini and friends —
+                drive 31 composable skills and 72 brand-grade design systems.
+                Generate web pages, slide decks, mobile prototypes, images, even
+                short videos — all running on your own laptop.
               </p>
-              <div className='hero-actions'>
+              <div className='hero-actions' data-reveal>
                 <a className='btn btn-primary' href='#agents'>
                   Explore the studio
                   <span className='arrow'>{arrowOut}</span>
@@ -140,7 +140,7 @@ export default function Page() {
                   <span className='arrow'>{arrowPlus}</span>
                 </a>
               </div>
-              <div className='hero-stats'>
+              <div className='hero-stats' data-reveal>
                 <div className='stat'>
                   <span className='ring solid'>31</span>
                   <span className='stat-label'>
@@ -160,7 +160,7 @@ export default function Page() {
                   </span>
                 </div>
               </div>
-              <div className='hero-foot'>
+              <div className='hero-foot' data-reveal>
                 <span className='meta'>
                   ↳{NBSP}{NBSP}pnpm tools-dev{NBSP}{NBSP}·{NBSP}{NBSP}3 commands
                   to start
@@ -170,7 +170,7 @@ export default function Page() {
                 </span>
               </div>
             </div>
-            <div className='hero-art'>
+            <div className='hero-art' data-reveal='scale'>
               <span className='corner tl' />
               <span className='corner tr' />
               <span className='corner bl' />
@@ -215,7 +215,7 @@ export default function Page() {
               <span>002 / 008</span>
             </div>
             <div className='about-grid'>
-              <div className='about-copy'>
+              <div className='about-copy' data-reveal>
                 <span className='label'>
                   About the studio <span className='ix'>· Nº 02</span>
                 </span>
@@ -244,7 +244,7 @@ export default function Page() {
                   </span>
                 </div>
               </div>
-              <div className='about-art'>
+              <div className='about-art' data-reveal='right'>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src='/assets/about.png' alt='' />
                 <div className='about-side-note'>
@@ -285,7 +285,7 @@ export default function Page() {
               <span>003 / 008</span>
             </div>
             <div className='capabilities-grid'>
-              <div className='capabilities-art'>
+              <div className='capabilities-art' data-reveal='left'>
                 <span className='corner tl' />
                 <span className='corner br' />
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -295,7 +295,7 @@ export default function Page() {
                   {NBSP}·{NBSP}CAPABILITIES MATRIX{NBSP}·{NBSP}OD/26
                 </div>
               </div>
-              <div className='capabilities-copy'>
+              <div className='capabilities-copy' data-reveal>
                 <span className='label'>
                   Capabilities <span className='ix'>· Nº 03</span>
                 </span>
@@ -309,7 +309,7 @@ export default function Page() {
                   intentional, expressive, and alive.
                 </p>
                 <div className='cards'>
-                  <div className='card'>
+                  <div className='card' data-reveal>
                     <div className='num'>
                       01<span className='tag'>Skills</span>
                     </div>
@@ -339,7 +339,7 @@ export default function Page() {
                       {arrowOut}
                     </a>
                   </div>
-                  <div className='card'>
+                  <div className='card' data-reveal>
                     <div className='num'>
                       02<span className='tag'>Systems</span>
                     </div>
@@ -371,7 +371,7 @@ export default function Page() {
                       {arrowOut}
                     </a>
                   </div>
-                  <div className='card'>
+                  <div className='card' data-reveal>
                     <div className='num'>
                       03<span className='tag'>Adapters</span>
                     </div>
@@ -399,7 +399,7 @@ export default function Page() {
                       {arrowOut}
                     </a>
                   </div>
-                  <div className='card'>
+                  <div className='card' data-reveal>
                     <div className='num'>
                       04<span className='tag'>BYOK</span>
                     </div>
@@ -445,7 +445,7 @@ export default function Page() {
               <span>004 / 008</span>
             </div>
             <div className='labs-head'>
-              <div>
+              <div data-reveal>
                 <span className='label'>
                   Labs <span className='ix'>· Nº 04</span>
                 </span>
@@ -454,7 +454,7 @@ export default function Page() {
                   machine-made form<span className='dot'>.</span>
                 </h2>
               </div>
-              <div className='pills'>
+              <div className='pills' data-reveal='right'>
                 <button type='button' className='pill active'>
                   All<span className='count'>31</span>
                 </button>
@@ -529,7 +529,7 @@ export default function Page() {
                   src: '/assets/lab-5.png',
                 },
               ].map((lab) => (
-                <div className='lab' key={lab.num}>
+                <div className='lab' key={lab.num} data-reveal>
                   <div className='lab-img'>
                     <span className='badge'>{lab.badge}</span>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -581,7 +581,7 @@ export default function Page() {
               <span>005 / 008</span>
             </div>
             <div className='method-head'>
-              <div>
+              <div data-reveal>
                 <span className='label'>
                   Method <span className='ix'>· Nº 05</span>
                 </span>
@@ -589,7 +589,7 @@ export default function Page() {
                   From <em>signals</em> to systems<span className='dot'>.</span>
                 </h2>
               </div>
-              <div className='right'>
+              <div className='right' data-reveal='right'>
                 <span className='plus'>+</span>
                 <p>
                   Every stage is iterative, visual, and research-driven —
@@ -624,7 +624,7 @@ export default function Page() {
                   src: '/assets/method-4.png',
                 },
               ].map((step) => (
-                <div className='method-step' key={step.num}>
+                <div className='method-step' key={step.num} data-reveal>
                   <div className='num'>{step.num}</div>
                   <h4>
                     {step.title} <span className='arrow-r'>→</span>
@@ -663,7 +663,7 @@ export default function Page() {
               <span>006 / 008</span>
             </div>
             <div className='work-grid'>
-              <div className='work-copy'>
+              <div className='work-copy' data-reveal>
                 <span className='label'>Selected work</span>
                 <h2>
                   Skills that turn briefs into <em>memorable</em> shippable{' '}
@@ -674,7 +674,7 @@ export default function Page() {
                   View all 31 skills
                 </a>
               </div>
-              <div className='work-card'>
+              <div className='work-card' data-reveal>
                 <div className='label-row'>
                   <span className='small-label'>Featured skill</span>
                   <span className='index'>01 / 31</span>
@@ -693,7 +693,7 @@ export default function Page() {
                   <span>DEFAULT</span>
                 </div>
               </div>
-              <div className='work-card alt'>
+              <div className='work-card alt' data-reveal>
                 <div className='label-row'>
                   <span className='small-label'>Companion</span>
                   <span className='index'>04 / 31</span>
@@ -755,7 +755,7 @@ export default function Page() {
               <span>007 / 008</span>
             </div>
             <div className='testimonial-grid'>
-              <div className='testimonial-copy'>
+              <div className='testimonial-copy' data-reveal>
                 <span className='label'>
                   Collaborators <span className='ix'>· Nº 06</span>
                 </span>
@@ -778,7 +778,7 @@ export default function Page() {
                   culture.
                 </p>
                 <div className='partners'>
-                  <div className='partner'>
+                  <div className='partner' data-reveal>
                     <div className='glyph'>
                       <svg
                         viewBox='0 0 80 30'
@@ -792,7 +792,7 @@ export default function Page() {
                     <span>huashu-design</span>
                     <small>Philosophy</small>
                   </div>
-                  <div className='partner'>
+                  <div className='partner' data-reveal>
                     <div className='glyph'>
                       <svg
                         viewBox='0 0 80 30'
@@ -806,7 +806,7 @@ export default function Page() {
                     <span>guizang-ppt</span>
                     <small>Decks</small>
                   </div>
-                  <div className='partner'>
+                  <div className='partner' data-reveal>
                     <div className='glyph'>
                       <svg
                         viewBox='0 0 80 30'
@@ -823,7 +823,7 @@ export default function Page() {
                     <span>multica-ai</span>
                     <small>Daemon</small>
                   </div>
-                  <div className='partner'>
+                  <div className='partner' data-reveal>
                     <div className='glyph'>
                       <svg
                         viewBox='0 0 80 30'
@@ -838,7 +838,7 @@ export default function Page() {
                     <span>open-codesign</span>
                     <small>UX</small>
                   </div>
-                  <div className='partner'>
+                  <div className='partner' data-reveal>
                     <div className='glyph'>
                       <svg
                         viewBox='0 0 80 30'
@@ -857,7 +857,7 @@ export default function Page() {
                   Read more stories
                 </a>
               </div>
-              <div className='testimonial-art'>
+              <div className='testimonial-art' data-reveal='right'>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src='/assets/testimonial.png' alt='' />
               </div>
@@ -878,7 +878,7 @@ export default function Page() {
               <span>008 / 008</span>
             </div>
             <div className='cta-grid'>
-              <div>
+              <div data-reveal>
                 <span className='label'>
                   Start a conversation <span className='ix'>· Nº 07</span>
                 </span>
@@ -912,7 +912,7 @@ export default function Page() {
                   </span>
                 </div>
               </div>
-              <div className='cta-art'>
+              <div className='cta-art' data-reveal='right'>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src='/assets/cta.png' alt='' />
                 <div className='index'>Nº 08</div>
@@ -1021,7 +1021,7 @@ export default function Page() {
               </span>
             </div>
             <div className='foot-mega'>
-              <div className='word'>
+              <div className='word' data-reveal='rise-lg'>
                 Open <em>Design</em>.
               </div>
             </div>

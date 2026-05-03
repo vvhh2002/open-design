@@ -1451,6 +1451,76 @@
     color: var(--coral);
   }
 
+  /* ---------- scroll-reveal motion ----------
+   *
+   * Driven by the inline IntersectionObserver script at the bottom of
+   * <body>. Elements with `data-reveal` start hidden + offset; the
+   * observer sets `data-revealed='true'` once they enter the viewport,
+   * triggering the transition.
+   *
+   * Uses `translate` / `scale` longhand properties (not `transform`) so
+   * `.work-card` keeps its static `transform: rotate()` intact while
+   * still translating in.
+   */
+  [data-reveal] {
+    opacity: 0;
+    translate: 0 28px;
+    transition:
+      opacity 900ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms),
+      translate 900ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms),
+      scale 900ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms);
+    will-change: opacity, translate, scale;
+  }
+  [data-reveal='left'] { translate: -36px 0; }
+  [data-reveal='right'] { translate: 36px 0; }
+  [data-reveal='scale'] { translate: 0 0; scale: 0.96; }
+  [data-reveal='rise-lg'] { translate: 0 64px; scale: 0.985; }
+  [data-reveal][data-revealed='true'] {
+    opacity: 1;
+    translate: 0 0;
+    scale: 1;
+  }
+
+  /* stagger primitives — set --reveal-delay on grid children so siblings
+   * appear in sequence rather than all at once. */
+  .cards > .card[data-reveal]:nth-child(1) { --reveal-delay: 0ms; }
+  .cards > .card[data-reveal]:nth-child(2) { --reveal-delay: 90ms; }
+  .cards > .card[data-reveal]:nth-child(3) { --reveal-delay: 180ms; }
+  .cards > .card[data-reveal]:nth-child(4) { --reveal-delay: 270ms; }
+
+  .labs-grid > .lab[data-reveal]:nth-child(1) { --reveal-delay: 0ms; }
+  .labs-grid > .lab[data-reveal]:nth-child(2) { --reveal-delay: 90ms; }
+  .labs-grid > .lab[data-reveal]:nth-child(3) { --reveal-delay: 180ms; }
+  .labs-grid > .lab[data-reveal]:nth-child(4) { --reveal-delay: 270ms; }
+  .labs-grid > .lab[data-reveal]:nth-child(5) { --reveal-delay: 360ms; }
+
+  .method-grid > .method-step[data-reveal]:nth-child(1) { --reveal-delay: 0ms; }
+  .method-grid > .method-step[data-reveal]:nth-child(2) { --reveal-delay: 110ms; }
+  .method-grid > .method-step[data-reveal]:nth-child(3) { --reveal-delay: 220ms; }
+  .method-grid > .method-step[data-reveal]:nth-child(4) { --reveal-delay: 330ms; }
+
+  .partners > .partner[data-reveal]:nth-child(1) { --reveal-delay: 0ms; }
+  .partners > .partner[data-reveal]:nth-child(2) { --reveal-delay: 70ms; }
+  .partners > .partner[data-reveal]:nth-child(3) { --reveal-delay: 140ms; }
+  .partners > .partner[data-reveal]:nth-child(4) { --reveal-delay: 210ms; }
+  .partners > .partner[data-reveal]:nth-child(5) { --reveal-delay: 280ms; }
+
+  .hero-copy > [data-reveal]:nth-of-type(1) { --reveal-delay: 0ms; }
+  .hero-copy > [data-reveal]:nth-of-type(2) { --reveal-delay: 80ms; }
+  .hero-copy > [data-reveal]:nth-of-type(3) { --reveal-delay: 160ms; }
+  .hero-copy > [data-reveal]:nth-of-type(4) { --reveal-delay: 240ms; }
+  .hero-copy > [data-reveal]:nth-of-type(5) { --reveal-delay: 320ms; }
+  .hero-copy > [data-reveal]:nth-of-type(6) { --reveal-delay: 400ms; }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal] {
+      opacity: 1 !important;
+      translate: 0 0 !important;
+      scale: 1 !important;
+      transition: none !important;
+    }
+  }
+
   /* responsive */
   @media (max-width: 1280px) {
     .container { padding: 0 44px; }
@@ -1563,14 +1633,14 @@
     </div>
     <div class='container hero-grid'>
       <div class='hero-copy'>
-        <span class='label'>Open-source design studio <span class='ix'>· Nº 01</span></span>
-        <h1 class='display'>
+        <span class='label' data-reveal>Open-source design studio <span class='ix'>· Nº 01</span></span>
+        <h1 class='display' data-reveal>
           Designing <em>intelligence</em> with skills, <em>taste,</em> and <em>code</em><span class='dot'>.</span>
         </h1>
-        <p class='lead'>
-          Open Design is the open-source alternative to Claude Design. 12 coding-agent CLIs auto-detected on your <code style='font-family:var(--mono);font-size:14px;background:var(--bone);padding:1px 6px;border-radius:4px;'>$PATH</code>, driven by 31 composable skills and 72 brand-grade design systems. Local-first, web-deployable, BYOK at every layer.
+        <p class='lead' data-reveal>
+          The open-source alternative to Anthropic&rsquo;s Claude Design. 12 coding agents — Claude, Codex, Cursor, Gemini and friends — drive 31 composable skills and 72 brand-grade design systems. Generate web pages, slide decks, mobile prototypes, images, even short videos — all running on your own laptop.
         </p>
-        <div class='hero-actions'>
+        <div class='hero-actions' data-reveal>
           <a class='btn btn-primary' href='#agents'>
             Explore the studio
             <span class='arrow'><svg viewBox='0 0 24 24'><path d='M5 19L19 5M19 5H8M19 5v11'/></svg></span>
@@ -1580,7 +1650,7 @@
             <span class='arrow'><svg viewBox='0 0 24 24'><circle cx='12' cy='12' r='9'/><path d='M9 12h6M12 9v6'/></svg></span>
           </a>
         </div>
-        <div class='hero-stats'>
+        <div class='hero-stats' data-reveal>
           <div class='stat'>
             <span class='ring solid'>31</span>
             <span class='stat-label'><b>skills</b>shippable</span>
@@ -1594,12 +1664,12 @@
             <span class='stat-label'><b>CLIs</b>BYO agent</span>
           </div>
         </div>
-        <div class='hero-foot'>
+        <div class='hero-foot' data-reveal>
           <span class='meta'>↳ &nbsp; pnpm tools-dev &nbsp; · &nbsp; 3 commands to start</span>
           <span class='coord'>52.5200° N&nbsp;·&nbsp;13.4050° E</span>
         </div>
       </div>
-      <div class='hero-art'>
+      <div class='hero-art' data-reveal='scale'>
         <span class='corner tl'></span>
         <span class='corner tr'></span>
         <span class='corner bl'></span>
@@ -1632,7 +1702,7 @@
         <span>002 / 008</span>
       </div>
       <div class='about-grid'>
-        <div class='about-copy'>
+        <div class='about-copy' data-reveal>
           <span class='label'>About the studio <span class='ix'>· Nº 02</span></span>
           <h2 class='display'>
             We treat <em>your agent</em> as a creative <em>collaborator,</em> not a black box<span class='dot'>.</span>
@@ -1653,7 +1723,7 @@
             </span>
           </div>
         </div>
-        <div class='about-art'>
+        <div class='about-art' data-reveal='right'>
           <img src='./assets/about.png' alt='' />
           <div class='about-side-note'>
             <b></b>
@@ -1681,13 +1751,13 @@
         <span>003 / 008</span>
       </div>
       <div class='capabilities-grid'>
-        <div class='capabilities-art'>
+        <div class='capabilities-art' data-reveal='left'>
           <span class='corner tl'></span>
           <span class='corner br'></span>
           <img src='./assets/capabilities.png' alt='' />
           <div class='ribbon'><b>OPEN DESIGN</b> &nbsp;·&nbsp; CAPABILITIES MATRIX &nbsp;·&nbsp; OD/26</div>
         </div>
-        <div class='capabilities-copy'>
+        <div class='capabilities-copy' data-reveal>
           <span class='label'>Capabilities <span class='ix'>· Nº 03</span></span>
           <h2 class='display'>
             Skills, systems, and surfaces <em>for creative</em> intelligence<span class='dot'>.</span>
@@ -1696,7 +1766,7 @@
             We blend human taste with whichever agent you already trust to ship interfaces, decks, and editorial pages that feel intentional, expressive, and alive.
           </p>
           <div class='cards'>
-            <div class='card'>
+            <div class='card' data-reveal>
               <div class='num'>01<span class='tag'>Skills</span></div>
               <svg class='icon' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'>
                 <circle cx='9' cy='9' r='5'/>
@@ -1708,7 +1778,7 @@
                 <svg viewBox='0 0 24 24'><path d='M5 19L19 5M19 5H8M19 5v11'/></svg>
               </a>
             </div>
-            <div class='card'>
+            <div class='card' data-reveal>
               <div class='num'>02<span class='tag'>Systems</span></div>
               <svg class='icon' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'>
                 <rect x='3.5' y='3.5' width='8' height='8'/>
@@ -1722,7 +1792,7 @@
                 <svg viewBox='0 0 24 24'><path d='M5 19L19 5M19 5H8M19 5v11'/></svg>
               </a>
             </div>
-            <div class='card'>
+            <div class='card' data-reveal>
               <div class='num'>03<span class='tag'>Adapters</span></div>
               <svg class='icon' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'>
                 <circle cx='8' cy='12' r='4.5'/>
@@ -1734,7 +1804,7 @@
                 <svg viewBox='0 0 24 24'><path d='M5 19L19 5M19 5H8M19 5v11'/></svg>
               </a>
             </div>
-            <div class='card'>
+            <div class='card' data-reveal>
               <div class='num'>04<span class='tag'>BYOK</span></div>
               <svg class='icon' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'>
                 <path d='M5 8h14v8H5z'/>
@@ -1765,13 +1835,13 @@
         <span>004 / 008</span>
       </div>
       <div class='labs-head'>
-        <div>
+        <div data-reveal>
           <span class='label'>Labs <span class='ix'>· Nº 04</span></span>
           <h2 class='display' style='margin-top:30px;'>
             A living archive of <em>experiments</em> in skills, decks, and machine-made form<span class='dot'>.</span>
           </h2>
         </div>
-        <div class='pills'>
+        <div class='pills' data-reveal='right'>
           <button class='pill active'>All<span class='count'>31</span></button>
           <button class='pill'>Prototype<span class='count'>27</span></button>
           <button class='pill'>Deck<span class='count'>04</span></button>
@@ -1789,35 +1859,35 @@
         </div>
       </div>
       <div class='labs-grid'>
-        <div class='lab'>
+        <div class='lab' data-reveal>
           <div class='lab-img'><span class='badge'>Deck</span><img src='./assets/lab-1.png' alt='' /></div>
           <div class='num-row'><span>Nº 01</span><span>2026</span></div>
           <h4>Magazine Decks</h4>
           <p>Editorial-grade slide decks with <code style='font-family:var(--mono);font-size:12px;'>guizang-ppt</code>. Magazine layout, WebGL hero.</p>
           <a class='arrow-mark' href='#'><svg viewBox='0 0 24 24'><path d='M5 19L19 5M19 5H8M19 5v11'/></svg></a>
         </div>
-        <div class='lab'>
+        <div class='lab' data-reveal>
           <div class='lab-img'><span class='badge'>Media</span><img src='./assets/lab-2.png' alt='' /></div>
           <div class='num-row'><span>Nº 02</span><span>2026</span></div>
           <h4>Synthetic Matter</h4>
           <p>Gpt-image-2 + Seedance + HyperFrames. Image, video, audio — same chat surface as code.</p>
           <a class='arrow-mark' href='#'><svg viewBox='0 0 24 24'><path d='M5 19L19 5M19 5H8M19 5v11'/></svg></a>
         </div>
-        <div class='lab'>
+        <div class='lab' data-reveal>
           <div class='lab-img'><span class='badge'>Loop</span><img src='./assets/lab-3.png' alt='' /></div>
           <div class='num-row'><span>Nº 03</span><span>2026</span></div>
           <h4>Prompt Choreography</h4>
           <p>The interactive question form pops before a single pixel is improvised. 30s of radios beats 30min of redirects.</p>
           <a class='arrow-mark' href='#'><svg viewBox='0 0 24 24'><path d='M5 19L19 5M19 5H8M19 5v11'/></svg></a>
         </div>
-        <div class='lab'>
+        <div class='lab' data-reveal>
           <div class='lab-img'><span class='badge'>Critique</span><img src='./assets/lab-4.png' alt='' /></div>
           <div class='num-row'><span>Nº 04</span><span>2026</span></div>
           <h4>Visual Reasoning</h4>
           <p>5-dim self-critique gates every artifact: philosophy · hierarchy · execution · specificity · restraint.</p>
           <a class='arrow-mark' href='#'><svg viewBox='0 0 24 24'><path d='M5 19L19 5M19 5H8M19 5v11'/></svg></a>
         </div>
-        <div class='lab'>
+        <div class='lab' data-reveal>
           <div class='lab-img'><span class='badge'>Runtime</span><img src='./assets/lab-5.png' alt='' /></div>
           <div class='num-row'><span>Nº 05</span><span>2026</span></div>
           <h4>Soft Systems</h4>
@@ -1847,37 +1917,37 @@
         <span>005 / 008</span>
       </div>
       <div class='method-head'>
-        <div>
+        <div data-reveal>
           <span class='label'>Method <span class='ix'>· Nº 05</span></span>
           <h2 class='display' style='margin-top:30px;'>
             From <em>signals</em> to systems<span class='dot'>.</span>
           </h2>
         </div>
-        <div class='right'>
+        <div class='right' data-reveal='right'>
           <span class='plus'>+</span>
           <p>Every stage is iterative, visual, and research-driven — composable files, not opaque prompts.</p>
         </div>
       </div>
       <div class='method-grid'>
-        <div class='method-step'>
+        <div class='method-step' data-reveal>
           <div class='num'>01</div>
           <h4>Detect <span class='arrow-r'>→</span></h4>
           <p>The daemon scans your $PATH for 12 coding agents and auto-loads 31 skills + 72 systems on boot.</p>
           <div class='img'><img src='./assets/method-1.png' alt='' /></div>
         </div>
-        <div class='method-step'>
+        <div class='method-step' data-reveal>
           <div class='num'>02</div>
           <h4>Discover <span class='arrow-r'>→</span></h4>
           <p>Turn 1 is a question form — surface, audience, tone, scale, brand context. Locked in 30 seconds.</p>
           <div class='img'><img src='./assets/method-2.png' alt='' /></div>
         </div>
-        <div class='method-step'>
+        <div class='method-step' data-reveal>
           <div class='num'>03</div>
           <h4>Direct <span class='arrow-r'>→</span></h4>
           <p>Pick one of 5 deterministic visual directions. Palette in OKLch, font stack, layout posture cues.</p>
           <div class='img'><img src='./assets/method-3.png' alt='' /></div>
         </div>
-        <div class='method-step'>
+        <div class='method-step' data-reveal>
           <div class='num'>04</div>
           <h4>Deliver</h4>
           <p>The agent writes to disk, you preview in a sandboxed iframe, export HTML / PDF / PPTX / ZIP / Markdown.</p>
@@ -1907,7 +1977,7 @@
         <span>006 / 008</span>
       </div>
       <div class='work-grid'>
-        <div class='work-copy'>
+        <div class='work-copy' data-reveal>
           <span class='label'>Selected work</span>
           <h2>
             Skills that turn briefs into <em>memorable</em> shippable <em>artifacts</em><span class='dot'>.</span>
@@ -1916,7 +1986,7 @@
             View all 31 skills
           </a>
         </div>
-        <div class='work-card'>
+        <div class='work-card' data-reveal>
           <div class='label-row'>
             <span class='small-label'>Featured skill</span>
             <span class='index'>01 / 31</span>
@@ -1929,7 +1999,7 @@
             <span>DEFAULT</span>
           </div>
         </div>
-        <div class='work-card alt'>
+        <div class='work-card alt' data-reveal>
           <div class='label-row'>
             <span class='small-label'>Companion</span>
             <span class='index'>04 / 31</span>
@@ -1963,7 +2033,7 @@
         <span>007 / 008</span>
       </div>
       <div class='testimonial-grid'>
-        <div class='testimonial-copy'>
+        <div class='testimonial-copy' data-reveal>
           <span class='label'>Collaborators <span class='ix'>· Nº 06</span></span>
           <h2 style='margin-top:30px;'>
             &ldquo;Open Design helped us turn vague <em>AI ideas</em> into a visual system that felt <em>sharp, believable,</em> and genuinely new.&rdquo;
@@ -1975,7 +2045,7 @@
           <div class='divider'></div>
           <p class='partners-text'>Standing on the shoulders of teams shipping open-source design culture.</p>
           <div class='partners'>
-            <div class='partner'>
+            <div class='partner' data-reveal>
               <div class='glyph'>
                 <svg viewBox='0 0 80 30' fill='none' stroke='currentColor' stroke-width='2'>
                   <path d='M5 24L20 6L35 24M12 18h16'/>
@@ -1984,7 +2054,7 @@
               <span>huashu-design</span>
               <small>Philosophy</small>
             </div>
-            <div class='partner'>
+            <div class='partner' data-reveal>
               <div class='glyph'>
                 <svg viewBox='0 0 80 30' fill='none' stroke='currentColor' stroke-width='2'>
                   <path d='M8 24L20 6L24 22L36 4'/>
@@ -1993,7 +2063,7 @@
               <span>guizang-ppt</span>
               <small>Decks</small>
             </div>
-            <div class='partner'>
+            <div class='partner' data-reveal>
               <div class='glyph'>
                 <svg viewBox='0 0 80 30' fill='none' stroke='currentColor' stroke-width='2'>
                   <rect x='6' y='6' width='4' height='18'/>
@@ -2005,7 +2075,7 @@
               <span>multica-ai</span>
               <small>Daemon</small>
             </div>
-            <div class='partner'>
+            <div class='partner' data-reveal>
               <div class='glyph'>
                 <svg viewBox='0 0 80 30' fill='none' stroke='currentColor' stroke-width='2'>
                   <circle cx='15' cy='15' r='9'/>
@@ -2015,7 +2085,7 @@
               <span>open-codesign</span>
               <small>UX</small>
             </div>
-            <div class='partner'>
+            <div class='partner' data-reveal>
               <div class='glyph'>
                 <svg viewBox='0 0 80 30' fill='none' stroke='currentColor' stroke-width='2'>
                   <path d='M8 6L8 24M22 6L22 24M8 15h14'/>
@@ -2027,7 +2097,7 @@
           </div>
           <a class='read-more' href='#'>Read more stories</a>
         </div>
-        <div class='testimonial-art'>
+        <div class='testimonial-art' data-reveal='right'>
           <img src='./assets/testimonial.png' alt='' />
         </div>
       </div>
@@ -2047,7 +2117,7 @@
         <span>008 / 008</span>
       </div>
       <div class='cta-grid'>
-        <div>
+        <div data-reveal>
           <span class='label'>Start a conversation <span class='ix'>· Nº 07</span></span>
           <h2 class='display'>
             Let's build something <em>open</em> and <em>visually</em> unforgettable<span class='dot'>.</span>
@@ -2071,7 +2141,7 @@
             <span style='margin-left:auto;'>52.5200° N · 13.4050° E</span>
           </div>
         </div>
-        <div class='cta-art'>
+        <div class='cta-art' data-reveal='right'>
           <img src='./assets/cta.png' alt='' />
           <div class='index'>Nº 08</div>
           <div class='ribbon'>OPEN DESIGN &nbsp;·&nbsp; FIN.</div>
@@ -2137,11 +2207,35 @@
         </span>
       </div>
       <div class='foot-mega'>
-        <div class='word'>Open <em>Design</em>.</div>
+        <div class='word' data-reveal='rise-lg'>Open <em>Design</em>.</div>
       </div>
     </div>
   </footer>
 
 </div>
+
+<script>
+  /*
+   * Scroll-reveal observer — mirrors apps/landing-page/app/_components/reveal-root.tsx.
+   * Watches every [data-reveal] element and flips data-revealed='true'
+   * when it first enters the viewport, triggering the CSS transition.
+   */
+  (function () {
+    var elements = document.querySelectorAll('[data-reveal]:not([data-revealed])');
+    if (!elements.length) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      for (var i = 0; i < elements.length; i++) elements[i].dataset.revealed = 'true';
+      return;
+    }
+    var observer = new IntersectionObserver(function (entries) {
+      for (var i = 0; i < entries.length; i++) {
+        if (!entries[i].isIntersecting) continue;
+        entries[i].target.dataset.revealed = 'true';
+        observer.unobserve(entries[i].target);
+      }
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    for (var j = 0; j < elements.length; j++) observer.observe(elements[j]);
+  })();
+</script>
 </body>
 </html>
