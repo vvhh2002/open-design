@@ -41,6 +41,12 @@ const DE_SKILL_COPY: Record<string, { description?: string; examplePrompt?: stri
     examplePrompt:
       'Entwerfen Sie eine Editorial-Landingpage im Atelier-Zero- / Monocle-Stil — warme Papierleinwand, surreale Plaster-und-Architektur-Collage, übergroße gemischte Italic-Serif-Display-Type, römische Ziffern als Sektionsmarker und ein einziger Korallenakzent.',
   },
+  'editorial-collage-deck': {
+    examplePrompt:
+      'Erstellen Sie ein 11-Slide-Pitch-Deck für „Lumen Field“, ein Studio für Fokus-Soundscapes. Cover mit Hero-Plate, zwei Sektions-Trenner, zwei Produkt-Content-Slides mit Bullets, ein Stats-Slide mit 12 Soundscapes / 4 Presets / 1 Daily Ritual, ein Kundenzitat, ein abschließendes CTA und eine End-Card. Wiederverwenden Sie die Bildbibliothek von editorial-collage.',
+    description:
+      'Erstellt ein Single-File-Slide-Deck in der Atelier-Zero-Bildsprache (warmes Papier, italic-serif Akzent-Spans, korallenfarbene Schluss-Dots, surreale Collage-Platten). Das Deck nutzt Scroll-Snap-Pagination, Pfeiltasten- + Leertaste-Navigation, ein Live-HUD mit Slide-Zähler und Fortschrittsbalken und erbt das kanonische Stylesheet sowie die 16-Slot-Bildbibliothek der Schwester-Skill `editorial-collage`.',
+  },
   'email-marketing': {
     examplePrompt:
       'Entwerfen Sie eine Launch-E-Mail für eine sportliche Laufschuhmarke — Masthead, Hero, großes Headline-Lockup, Specs Grid, CTA.',
