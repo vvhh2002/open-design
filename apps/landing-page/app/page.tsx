@@ -11,6 +11,7 @@
  */
 
 import { Header } from './_components/header';
+import { Wire } from './_components/wire';
 
 const arrowOut = (
   <svg viewBox='0 0 24 24'>
@@ -52,10 +53,12 @@ const ext = {
   rel: 'noreferrer noopener',
 } as const;
 
-// Global wire — cities the studio is composed from + named contributors
-// behind the lineage projects. Both lists feed counter-scrolling
-// marquees in the editorial ticker between the hero and the About
-// section. Keep coordinates rough to fit the editorial register.
+// Global wire — cities the studio is composed from. The cities feed
+// the top counter-scrolling marquee in the editorial ticker between
+// the hero and the About section; the bottom contributor marquee is
+// owned by `<Wire />`, which fetches the actual repo contributors
+// from GitHub at runtime. Keep coordinates rough to fit the
+// editorial register.
 const WIRE_CITIES = [
   { name: 'Berlin', coord: '52.52°N' },
   { name: 'Tokyo', coord: '35.68°N' },
@@ -80,28 +83,6 @@ const WIRE_CITIES = [
   { name: 'Mexico City', coord: '19.43°N' },
   { name: 'São Paulo', coord: '23.55°S' },
   { name: 'Sydney', coord: '33.87°S' },
-] as const;
-
-const WIRE_CONTRIBS = [
-  { handle: 'tw93', role: 'kami', href: 'https://github.com/tw93' },
-  { handle: 'op7418', role: 'guizang', href: 'https://github.com/op7418' },
-  {
-    handle: 'alchaincyf',
-    role: 'huashu',
-    href: 'https://github.com/alchaincyf',
-  },
-  {
-    handle: 'multica-ai',
-    role: 'daemon',
-    href: 'https://github.com/multica-ai',
-  },
-  {
-    handle: 'OpenCoworkAI',
-    role: 'codesign',
-    href: 'https://github.com/OpenCoworkAI',
-  },
-  { handle: 'nexu-io', role: 'studio', href: 'https://github.com/nexu-io' },
-  { handle: 'you', role: 'be next', href: REPO_CONTRIBUTORS },
 ] as const;
 
 export default function Page() {
@@ -256,60 +237,15 @@ export default function Page() {
         {/*
          * Slim editorial ticker between the hero and About. Two
          * counter-scrolling marquees signal that the project is
-         * global (cities, top row) and contributor-driven
-         * (handles, bottom row). Pure CSS animation; the track
-         * content is doubled in markup so the loop wraps seamlessly.
+         * global (cities, top row) and contributor-driven (handles,
+         * bottom row). Pure CSS animation; the track content is
+         * doubled in markup so the loop wraps seamlessly.
+         *
+         * Lives inside a client island because the contributor row is
+         * fetched live from the GitHub contributors API; the cities
+         * row is passed through as static data.
          */}
-        <section
-          className='wire'
-          data-od-id='wire'
-          aria-label='Global wire — cities and contributors'
-        >
-          <div className='container wire-inner'>
-            <div className='wire-left'>
-              <span className='wire-mark' aria-hidden='true'>
-                <span className='wire-pulse' />
-              </span>
-              <span className='wire-title'>
-                <b>From the field</b>
-                <span>
-                  Open · {WIRE_CITIES.length} cities ·{' '}
-                  {WIRE_CONTRIBS.length - 1} contributors
-                </span>
-              </span>
-            </div>
-            <div className='wire-rows'>
-              <div className='wire-row'>
-                <div className='marquee-track' aria-hidden='true'>
-                  {[...WIRE_CITIES, ...WIRE_CITIES].map((c, i) => (
-                    <span className='wire-item' key={`city-${i}`}>
-                      <span className='wire-dot'>·</span>
-                      <span className='wire-coord'>{c.coord}</span>
-                      <span className='wire-name'>{c.name}</span>
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <div className='wire-row reverse'>
-                <div className='marquee-track'>
-                  {[...WIRE_CONTRIBS, ...WIRE_CONTRIBS].map((c, i) => (
-                    <a
-                      className='wire-item is-link'
-                      key={`contrib-${i}`}
-                      href={c.href}
-                      aria-label={`Open ${c.handle} on GitHub`}
-                      {...ext}
-                    >
-                      <span className='wire-dot'>·</span>
-                      <span className='wire-handle'>@{c.handle}</span>
-                      <span className='wire-role'>{c.role}</span>
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <Wire cities={WIRE_CITIES} />
 
         {/* ====== ABOUT ====== */}
         <section className='about' data-od-id='about'>
