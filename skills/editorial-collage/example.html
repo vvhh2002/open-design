@@ -123,7 +123,15 @@
   .topbar-inner .mid { display: inline-flex; gap: 26px; }
   .topbar-inner .mid > span { white-space: nowrap; }
   .topbar-inner .right { display: inline-flex; gap: 18px; align-items: center; }
-  .topbar-inner .right > span { white-space: nowrap; }
+  .topbar-inner .right > span,
+  .topbar-inner .right > a { white-space: nowrap; }
+  .topbar-link {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 160ms ease, border-color 160ms ease;
+  }
+  .topbar-link:hover { color: var(--coral); border-bottom-color: var(--coral); }
   .topbar .pulse {
     width: 6px; height: 6px;
     border-radius: 50%;
@@ -1087,10 +1095,21 @@
     padding: 32px 30px;
     position: relative;
     transform: rotate(-1.2deg);
+    text-decoration: none;
+    display: block;
+    transition: transform 280ms ease, box-shadow 280ms ease;
+  }
+  .work-card:hover {
+    transform: rotate(-1.2deg) translateY(-4px);
+    box-shadow: var(--shadow);
   }
   .work-card.alt {
     transform: rotate(2.4deg) translateY(20px);
     padding: 28px 26px;
+  }
+  .work-card.alt:hover {
+    transform: rotate(2.4deg) translateY(16px);
+    box-shadow: var(--shadow);
   }
   .work-card .label-row {
     display: flex;
@@ -1240,12 +1259,20 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: transform 220ms ease;
   }
+  .partner:hover { transform: translateY(-2px); }
+  .partner:hover .glyph { color: var(--coral); }
+  .partner:hover span { color: var(--coral); }
   .partner .glyph {
     height: 32px;
     display: flex;
     align-items: center;
     color: var(--ink);
+    transition: color 220ms ease;
   }
   .partner .glyph svg { height: 100%; width: auto; max-width: 90px; }
   .partner span {
@@ -1253,6 +1280,7 @@
     font-size: 13px;
     color: var(--ink);
     letter-spacing: -0.005em;
+    transition: color 220ms ease;
     font-weight: 600;
   }
   .partner small {
@@ -1386,6 +1414,33 @@
     line-height: 1.55;
     max-width: 38ch;
   }
+  .foot-brand p .inline-link,
+  .inline-link {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    transition: color 160ms ease, border-color 160ms ease;
+  }
+  .inline-link:hover {
+    color: var(--coral);
+    border-bottom-color: var(--coral);
+  }
+  .method-repo-link {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 160ms ease, border-color 160ms ease;
+  }
+  .method-repo-link:hover {
+    color: var(--coral);
+    border-bottom-color: var(--coral);
+  }
+  .library-link {
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 160ms ease;
+  }
+  .library-link:hover { border-bottom-color: var(--coral); }
   .foot-col h5 {
     font-family: var(--sans);
     font-size: 11px;
@@ -1588,7 +1643,7 @@
         <span>Apache-2.0 · Made on Earth</span>
       </span>
       <span class='right'>
-        <span><span class='pulse'></span>Live · v0.4.6</span>
+        <a class='topbar-link' href='https://github.com/nexu-io/open-design/releases' target='_blank' rel='noreferrer noopener'><span class='pulse'></span>Live · v0.4.6</a>
         <span><b>EN</b> · DE · 中文 · 日本語</span>
       </span>
     </div>
@@ -1604,15 +1659,15 @@
       </a>
       <nav>
         <ul class='nav-links'>
-          <li><a href='#skills'>Skills<span class='num'>31</span></a></li>
-          <li><a href='#systems'>Systems<span class='num'>72</span></a></li>
+          <li><a href='https://github.com/nexu-io/open-design/tree/main/skills' target='_blank' rel='noreferrer noopener'>Skills<span class='num'>31</span></a></li>
+          <li><a href='https://github.com/nexu-io/open-design/tree/main/design-systems' target='_blank' rel='noreferrer noopener'>Systems<span class='num'>72</span></a></li>
           <li><a href='#agents'>Agents<span class='num'>12</span></a></li>
           <li><a href='#labs'>Labs<span class='num'>05</span></a></li>
           <li><a href='#contact'>Contact</a></li>
         </ul>
       </nav>
       <div class='nav-side'>
-        <a class='nav-cta' href='https://github.com/nexu-io/open-design'>Star · 0K</a>
+        <a class='nav-cta' href='https://github.com/nexu-io/open-design' target='_blank' rel='noreferrer noopener'>Star · 0K</a>
         <span class='status-dot' aria-hidden='true'></span>
       </div>
     </div>
@@ -1641,12 +1696,12 @@
           The open-source alternative to Anthropic&rsquo;s Claude Design. 12 coding agents — Claude, Codex, Cursor, Gemini and friends — drive 31 composable skills and 72 brand-grade design systems. Generate web pages, slide decks, mobile prototypes, images, even short videos — all running on your own laptop.
         </p>
         <div class='hero-actions' data-reveal>
-          <a class='btn btn-primary' href='#agents'>
-            Explore the studio
+          <a class='btn btn-primary' href='https://github.com/nexu-io/open-design' target='_blank' rel='noreferrer noopener'>
+            Star us on GitHub
             <span class='arrow'><svg viewBox='0 0 24 24'><path d='M5 19L19 5M19 5H8M19 5v11'/></svg></span>
           </a>
-          <a class='btn btn-ghost' href='#labs'>
-            View skills
+          <a class='btn btn-ghost' href='https://github.com/nexu-io/open-design/releases' target='_blank' rel='noreferrer noopener'>
+            Download desktop
             <span class='arrow'><svg viewBox='0 0 24 24'><circle cx='12' cy='12' r='9'/><path d='M9 12h6M12 9v6'/></svg></span>
           </a>
         </div>
@@ -1710,7 +1765,7 @@
           <p class='lead'>
             The strongest coding agents already live on your laptop. We don't ship one — we wire them into a skill-driven design workflow that runs locally with <code style='font-family:var(--mono);font-size:14px;background:var(--bone);padding:1px 6px;border-radius:4px;'>pnpm tools-dev</code>, deploys the web layer to Vercel, and stays BYOK at every layer.
           </p>
-          <a class='btn btn-ghost' href='#agents'>
+          <a class='btn btn-ghost' href='https://github.com/nexu-io/open-design/tree/main/apps/daemon' target='_blank' rel='noreferrer noopener'>
             Read our approach
             <span class='arrow'><svg viewBox='0 0 24 24'><path d='M5 19L19 5M19 5H8M19 5v11'/></svg></span>
           </a>
@@ -1774,7 +1829,7 @@
               </svg>
               <h3>Skills,<br/>not plugins</h3>
               <p>31 file-based <code style='font-family:var(--mono);font-size:12px;'>SKILL.md</code> bundles. Drop a folder in, restart the daemon, it appears.</p>
-              <a class='arrow-mark' href='#'>
+              <a class='arrow-mark' href='https://github.com/nexu-io/open-design/tree/main/skills' target='_blank' rel='noreferrer noopener' aria-label='Browse all skills on GitHub'>
                 <svg viewBox='0 0 24 24'><path d='M5 19L19 5M19 5H8M19 5v11'/></svg>
               </a>
             </div>
@@ -1788,7 +1843,7 @@
               </svg>
               <h3>Design Systems<br/>as Markdown</h3>
               <p>72 portable <code style='font-family:var(--mono);font-size:12px;'>DESIGN.md</code> systems — Linear, Vercel, Stripe, Apple, Cursor, Figma…</p>
-              <a class='arrow-mark' href='#'>
+              <a class='arrow-mark' href='https://github.com/nexu-io/open-design/tree/main/design-systems' target='_blank' rel='noreferrer noopener' aria-label='Browse all design systems on GitHub'>
                 <svg viewBox='0 0 24 24'><path d='M5 19L19 5M19 5H8M19 5v11'/></svg>
               </a>
             </div>
@@ -1800,7 +1855,7 @@
               </svg>
               <h3>12 Agent<br/>Adapters</h3>
               <p>Claude · Codex · Gemini · Cursor · Copilot · OpenCode · Devin · Hermes · Pi · Kimi · Kiro · Qwen — auto-detected on $PATH.</p>
-              <a class='arrow-mark' href='#'>
+              <a class='arrow-mark' href='https://github.com/nexu-io/open-design/tree/main/apps/daemon' target='_blank' rel='noreferrer noopener' aria-label='Read the agent adapter source on GitHub'>
                 <svg viewBox='0 0 24 24'><path d='M5 19L19 5M19 5H8M19 5v11'/></svg>
               </a>
             </div>
@@ -1812,7 +1867,7 @@
               </svg>
               <h3>BYOK<br/>at every layer</h3>
               <p>OpenAI-compatible proxy. DeepSeek, Groq, OpenRouter, your self-hosted vLLM — paste a baseUrl + key, ship.</p>
-              <a class='arrow-mark' href='#'>
+              <a class='arrow-mark' href='https://github.com/nexu-io/open-design' target='_blank' rel='noreferrer noopener' aria-label='See BYOK setup on GitHub'>
                 <svg viewBox='0 0 24 24'><path d='M5 19L19 5M19 5H8M19 5v11'/></svg>
               </a>
             </div>
@@ -1864,42 +1919,42 @@
           <div class='num-row'><span>Nº 01</span><span>2026</span></div>
           <h4>Magazine Decks</h4>
           <p>Editorial-grade slide decks with <code style='font-family:var(--mono);font-size:12px;'>guizang-ppt</code>. Magazine layout, WebGL hero.</p>
-          <a class='arrow-mark' href='#'><svg viewBox='0 0 24 24'><path d='M5 19L19 5M19 5H8M19 5v11'/></svg></a>
+          <a class='arrow-mark' href='https://github.com/nexu-io/open-design/tree/main/skills/guizang-ppt' target='_blank' rel='noreferrer noopener' aria-label='Open Magazine Decks on GitHub'><svg viewBox='0 0 24 24'><path d='M5 19L19 5M19 5H8M19 5v11'/></svg></a>
         </div>
         <div class='lab' data-reveal>
           <div class='lab-img'><span class='badge'>Media</span><img src='./assets/lab-2.png' alt='' /></div>
           <div class='num-row'><span>Nº 02</span><span>2026</span></div>
           <h4>Synthetic Matter</h4>
           <p>Gpt-image-2 + Seedance + HyperFrames. Image, video, audio — same chat surface as code.</p>
-          <a class='arrow-mark' href='#'><svg viewBox='0 0 24 24'><path d='M5 19L19 5M19 5H8M19 5v11'/></svg></a>
+          <a class='arrow-mark' href='https://github.com/nexu-io/open-design/tree/main/skills/hyperframes' target='_blank' rel='noreferrer noopener' aria-label='Open Synthetic Matter on GitHub'><svg viewBox='0 0 24 24'><path d='M5 19L19 5M19 5H8M19 5v11'/></svg></a>
         </div>
         <div class='lab' data-reveal>
           <div class='lab-img'><span class='badge'>Loop</span><img src='./assets/lab-3.png' alt='' /></div>
           <div class='num-row'><span>Nº 03</span><span>2026</span></div>
           <h4>Prompt Choreography</h4>
           <p>The interactive question form pops before a single pixel is improvised. 30s of radios beats 30min of redirects.</p>
-          <a class='arrow-mark' href='#'><svg viewBox='0 0 24 24'><path d='M5 19L19 5M19 5H8M19 5v11'/></svg></a>
+          <a class='arrow-mark' href='https://github.com/nexu-io/open-design/tree/main/skills/design-brief' target='_blank' rel='noreferrer noopener' aria-label='Open Prompt Choreography on GitHub'><svg viewBox='0 0 24 24'><path d='M5 19L19 5M19 5H8M19 5v11'/></svg></a>
         </div>
         <div class='lab' data-reveal>
           <div class='lab-img'><span class='badge'>Critique</span><img src='./assets/lab-4.png' alt='' /></div>
           <div class='num-row'><span>Nº 04</span><span>2026</span></div>
           <h4>Visual Reasoning</h4>
           <p>5-dim self-critique gates every artifact: philosophy · hierarchy · execution · specificity · restraint.</p>
-          <a class='arrow-mark' href='#'><svg viewBox='0 0 24 24'><path d='M5 19L19 5M19 5H8M19 5v11'/></svg></a>
+          <a class='arrow-mark' href='https://github.com/nexu-io/open-design/tree/main/skills/critique' target='_blank' rel='noreferrer noopener' aria-label='Open Visual Reasoning on GitHub'><svg viewBox='0 0 24 24'><path d='M5 19L19 5M19 5H8M19 5v11'/></svg></a>
         </div>
         <div class='lab' data-reveal>
           <div class='lab-img'><span class='badge'>Runtime</span><img src='./assets/lab-5.png' alt='' /></div>
           <div class='num-row'><span>Nº 05</span><span>2026</span></div>
           <h4>Soft Systems</h4>
           <p>Sandboxed iframe preview. Streaming todos. Real-cwd filesystem. Adaptive loops between human and machine.</p>
-          <a class='arrow-mark' href='#'><svg viewBox='0 0 24 24'><path d='M5 19L19 5M19 5H8M19 5v11'/></svg></a>
+          <a class='arrow-mark' href='https://github.com/nexu-io/open-design/tree/main/apps/daemon' target='_blank' rel='noreferrer noopener' aria-label='Open Soft Systems on GitHub'><svg viewBox='0 0 24 24'><path d='M5 19L19 5M19 5H8M19 5v11'/></svg></a>
         </div>
       </div>
       <div class='labs-foot'>
         <div class='progress'>
           <span class='on'></span><span class='on'></span><span class='on'></span><span class='on'></span><span class='on'></span><span></span><span></span><span></span>
         </div>
-        <span class='meta'>05 / 31 SKILLS &nbsp;·&nbsp; <span style='color:var(--coral);'>VIEW FULL LIBRARY →</span></span>
+        <span class='meta'>05 / 31 SKILLS &nbsp;·&nbsp; <a class='library-link' href='https://github.com/nexu-io/open-design/tree/main/skills' target='_blank' rel='noreferrer noopener' style='color:var(--coral);'>VIEW FULL LIBRARY →</a></span>
       </div>
     </div>
   </section>
@@ -1959,7 +2014,7 @@
           <span class='ring'></span>
           <span>Skills inform everything. Files make it real.</span>
         </div>
-        <div class='right'><b>github.com/nexu-io/open-design</b> &nbsp;·&nbsp; Apache-2.0</div>
+        <div class='right'><a class='method-repo-link' href='https://github.com/nexu-io/open-design' target='_blank' rel='noreferrer noopener'><b>github.com/nexu-io/open-design</b></a> &nbsp;·&nbsp; Apache-2.0</div>
       </div>
     </div>
   </section>
@@ -1982,11 +2037,11 @@
           <h2>
             Skills that turn briefs into <em>memorable</em> shippable <em>artifacts</em><span class='dot'>.</span>
           </h2>
-          <a class='work-link' href='#labs'>
+          <a class='work-link' href='https://github.com/nexu-io/open-design/tree/main/skills' target='_blank' rel='noreferrer noopener'>
             View all 31 skills
           </a>
         </div>
-        <div class='work-card' data-reveal>
+        <a class='work-card' data-reveal href='https://github.com/nexu-io/open-design/tree/main/skills/guizang-ppt' target='_blank' rel='noreferrer noopener'>
           <div class='label-row'>
             <span class='small-label'>Featured skill</span>
             <span class='index'>01 / 31</span>
@@ -1998,8 +2053,8 @@
             <span class='year'>2026 · DECK</span>
             <span>DEFAULT</span>
           </div>
-        </div>
-        <div class='work-card alt' data-reveal>
+        </a>
+        <a class='work-card alt' data-reveal href='https://github.com/nexu-io/open-design/tree/main/skills/dating-web' target='_blank' rel='noreferrer noopener'>
           <div class='label-row'>
             <span class='small-label'>Companion</span>
             <span class='index'>04 / 31</span>
@@ -2011,7 +2066,7 @@
             <span class='year'>2026 · WEB</span>
             <span>PROTOTYPE</span>
           </div>
-        </div>
+        </a>
       </div>
       <div class='work-arrows'>
         <button class='nav-btn'><svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6'><path d='M14 6l-6 6 6 6'/></svg></button>
@@ -2045,7 +2100,7 @@
           <div class='divider'></div>
           <p class='partners-text'>Standing on the shoulders of teams shipping open-source design culture.</p>
           <div class='partners'>
-            <div class='partner' data-reveal>
+            <a class='partner' data-reveal href='https://github.com/alchaincyf/huashu-design' target='_blank' rel='noreferrer noopener'>
               <div class='glyph'>
                 <svg viewBox='0 0 80 30' fill='none' stroke='currentColor' stroke-width='2'>
                   <path d='M5 24L20 6L35 24M12 18h16'/>
@@ -2053,8 +2108,8 @@
               </div>
               <span>huashu-design</span>
               <small>Philosophy</small>
-            </div>
-            <div class='partner' data-reveal>
+            </a>
+            <a class='partner' data-reveal href='https://github.com/op7418/guizang-ppt-skill' target='_blank' rel='noreferrer noopener'>
               <div class='glyph'>
                 <svg viewBox='0 0 80 30' fill='none' stroke='currentColor' stroke-width='2'>
                   <path d='M8 24L20 6L24 22L36 4'/>
@@ -2062,8 +2117,8 @@
               </div>
               <span>guizang-ppt</span>
               <small>Decks</small>
-            </div>
-            <div class='partner' data-reveal>
+            </a>
+            <a class='partner' data-reveal href='https://github.com/multica-ai/multica' target='_blank' rel='noreferrer noopener'>
               <div class='glyph'>
                 <svg viewBox='0 0 80 30' fill='none' stroke='currentColor' stroke-width='2'>
                   <rect x='6' y='6' width='4' height='18'/>
@@ -2074,8 +2129,8 @@
               </div>
               <span>multica-ai</span>
               <small>Daemon</small>
-            </div>
-            <div class='partner' data-reveal>
+            </a>
+            <a class='partner' data-reveal href='https://github.com/OpenCoworkAI/open-codesign' target='_blank' rel='noreferrer noopener'>
               <div class='glyph'>
                 <svg viewBox='0 0 80 30' fill='none' stroke='currentColor' stroke-width='2'>
                   <circle cx='15' cy='15' r='9'/>
@@ -2084,8 +2139,8 @@
               </div>
               <span>open-codesign</span>
               <small>UX</small>
-            </div>
-            <div class='partner' data-reveal>
+            </a>
+            <a class='partner' data-reveal href='https://www.anthropic.com/claude-code' target='_blank' rel='noreferrer noopener'>
               <div class='glyph'>
                 <svg viewBox='0 0 80 30' fill='none' stroke='currentColor' stroke-width='2'>
                   <path d='M8 6L8 24M22 6L22 24M8 15h14'/>
@@ -2093,9 +2148,9 @@
               </div>
               <span>Claude Code</span>
               <small>Skills.md</small>
-            </div>
+            </a>
           </div>
-          <a class='read-more' href='#'>Read more stories</a>
+          <a class='read-more' href='https://github.com/nexu-io/open-design' target='_blank' rel='noreferrer noopener'>Read more stories</a>
         </div>
         <div class='testimonial-art' data-reveal='right'>
           <img src='./assets/testimonial.png' alt='' />
@@ -2126,12 +2181,12 @@
             Star us on GitHub, drop into the issues, or run <code style='font-family:var(--mono);font-size:14px;background:var(--bone);padding:1px 6px;border-radius:4px;'>pnpm tools-dev</code> tonight. Three commands and the loop is yours.
           </p>
           <div class='cta-actions'>
-            <a class='btn btn-primary' href='https://github.com/nexu-io/open-design'>
+            <a class='btn btn-primary' href='https://github.com/nexu-io/open-design' target='_blank' rel='noreferrer noopener'>
               Star on GitHub
               <span class='arrow'><svg viewBox='0 0 24 24'><path d='M5 19L19 5M19 5H8M19 5v11'/></svg></span>
             </a>
-            <a class='email-pill' href='mailto:hello@open-design.dev'>
-              hello@open-design.dev
+            <a class='email-pill' href='https://github.com/nexu-io/open-design/issues' target='_blank' rel='noreferrer noopener'>
+              Open an issue
               <span class='arrow-circle'>→</span>
             </a>
           </div>
@@ -2159,42 +2214,42 @@
             <span class='brand-mark'>Ø</span>
             <span>Open Design</span>
           </a>
-          <p style='margin-top:18px;'>The open-source alternative to Claude Design. Built on the shoulders of huashu-design, guizang-ppt, multica-ai, and open-codesign.</p>
+          <p style='margin-top:18px;'>The open-source alternative to Claude Design. Built on the shoulders of <a class='inline-link' href='https://github.com/alchaincyf/huashu-design' target='_blank' rel='noreferrer noopener'>huashu-design</a>, <a class='inline-link' href='https://github.com/op7418/guizang-ppt-skill' target='_blank' rel='noreferrer noopener'>guizang-ppt</a>, <a class='inline-link' href='https://github.com/multica-ai/multica' target='_blank' rel='noreferrer noopener'>multica-ai</a>, and <a class='inline-link' href='https://github.com/OpenCoworkAI/open-codesign' target='_blank' rel='noreferrer noopener'>open-codesign</a>.</p>
         </div>
         <div class='foot-col'>
           <h5>Studio</h5>
           <ul>
             <li><a href='#agents'>Capabilities</a></li>
             <li><a href='#labs'>Labs</a></li>
-            <li><a href='#'>Method</a></li>
-            <li><a href='#'>Manifesto</a></li>
+            <li><a href='https://github.com/nexu-io/open-design/tree/main/apps/daemon' target='_blank' rel='noreferrer noopener'>Method</a></li>
+            <li><a href='https://github.com/nexu-io/open-design' target='_blank' rel='noreferrer noopener'>Manifesto</a></li>
           </ul>
         </div>
         <div class='foot-col'>
           <h5>Library</h5>
           <ul>
-            <li><a href='#'>31 Skills</a></li>
-            <li><a href='#'>72 Systems</a></li>
-            <li><a href='#'>5 Directions</a></li>
-            <li><a href='#'>5 Frames</a></li>
+            <li><a href='https://github.com/nexu-io/open-design/tree/main/skills' target='_blank' rel='noreferrer noopener'>31 Skills</a></li>
+            <li><a href='https://github.com/nexu-io/open-design/tree/main/design-systems' target='_blank' rel='noreferrer noopener'>72 Systems</a></li>
+            <li><a href='https://github.com/nexu-io/open-design/tree/main/design-systems' target='_blank' rel='noreferrer noopener'>5 Directions</a></li>
+            <li><a href='https://github.com/nexu-io/open-design/tree/main/skills/hyperframes' target='_blank' rel='noreferrer noopener'>5 Frames</a></li>
           </ul>
         </div>
         <div class='foot-col'>
           <h5>Connect</h5>
           <ul>
-            <li><a href='https://github.com/nexu-io/open-design'>GitHub</a></li>
-            <li><a href='#'>X / Twitter</a></li>
-            <li><a href='#'>Discord</a></li>
-            <li><a href='#'>RSS</a></li>
+            <li><a href='https://github.com/nexu-io/open-design' target='_blank' rel='noreferrer noopener'>GitHub</a></li>
+            <li><a href='https://github.com/nexu-io/open-design/issues' target='_blank' rel='noreferrer noopener'>Issues</a></li>
+            <li><a href='https://github.com/nexu-io/open-design/graphs/contributors' target='_blank' rel='noreferrer noopener'>Contributors</a></li>
+            <li><a href='https://github.com/nexu-io/open-design/releases' target='_blank' rel='noreferrer noopener'>Releases</a></li>
           </ul>
         </div>
         <div class='foot-col'>
           <h5>Docs</h5>
           <ul>
-            <li><a href='#'>Quickstart</a></li>
-            <li><a href='#'>Architecture</a></li>
-            <li><a href='#'>Skill Protocol</a></li>
-            <li><a href='#'>Roadmap</a></li>
+            <li><a href='https://github.com/nexu-io/open-design/blob/main/QUICKSTART.md' target='_blank' rel='noreferrer noopener'>Quickstart</a></li>
+            <li><a href='https://github.com/nexu-io/open-design/blob/main/docs/architecture.md' target='_blank' rel='noreferrer noopener'>Architecture</a></li>
+            <li><a href='https://github.com/nexu-io/open-design/blob/main/docs/skills-protocol.md' target='_blank' rel='noreferrer noopener'>Skill Protocol</a></li>
+            <li><a href='https://github.com/nexu-io/open-design/blob/main/docs/roadmap.md' target='_blank' rel='noreferrer noopener'>Roadmap</a></li>
           </ul>
         </div>
       </div>

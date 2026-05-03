@@ -24,6 +24,30 @@ const arrowPlus = (
 
 const NBSP = '\u00A0';
 
+// Canonical project URLs. Keep in sync with skills/editorial-collage/example.html.
+const REPO = 'https://github.com/nexu-io/open-design';
+const REPO_RELEASES = `${REPO}/releases`;
+const REPO_ISSUES = `${REPO}/issues`;
+const REPO_CONTRIBUTORS = `${REPO}/graphs/contributors`;
+const REPO_DAEMON = `${REPO}/tree/main/apps/daemon`;
+const REPO_SKILLS = `${REPO}/tree/main/skills`;
+const REPO_DESIGN_SYSTEMS = `${REPO}/tree/main/design-systems`;
+const REPO_DOCS = (file: string) => `${REPO}/blob/main/${file}`;
+
+// Lineage / inspiration projects — make every brand mention clickable.
+const LINEAGE = {
+  'huashu-design': 'https://github.com/alchaincyf/huashu-design',
+  'guizang-ppt': 'https://github.com/op7418/guizang-ppt-skill',
+  'multica-ai': 'https://github.com/multica-ai/multica',
+  'open-codesign': 'https://github.com/OpenCoworkAI/open-codesign',
+  'claude-code': 'https://www.anthropic.com/claude-code',
+} as const;
+
+const ext = {
+  target: '_blank',
+  rel: 'noreferrer noopener',
+} as const;
+
 export default function Page() {
   return (
     <>
@@ -54,10 +78,10 @@ export default function Page() {
               <span>Apache-2.0 · Made on Earth</span>
             </span>
             <span className='right'>
-              <span>
+              <a className='topbar-link' href={REPO_RELEASES} {...ext}>
                 <span className='pulse' />
                 Live · v0.4.6
-              </span>
+              </a>
               <span>
                 <b>EN</b> · DE · 中文 · 日本語
               </span>
@@ -78,12 +102,12 @@ export default function Page() {
             <nav>
               <ul className='nav-links'>
                 <li>
-                  <a href='#skills'>
+                  <a href={REPO_SKILLS} {...ext}>
                     Skills<span className='num'>31</span>
                   </a>
                 </li>
                 <li>
-                  <a href='#systems'>
+                  <a href={REPO_DESIGN_SYSTEMS} {...ext}>
                     Systems<span className='num'>72</span>
                   </a>
                 </li>
@@ -103,7 +127,7 @@ export default function Page() {
               </ul>
             </nav>
             <div className='nav-side'>
-              <a className='nav-cta' href='https://github.com/nexu-io/open-design'>
+              <a className='nav-cta' href={REPO} {...ext}>
                 Star · 0K
               </a>
               <span className='status-dot' aria-hidden='true' />
@@ -131,12 +155,12 @@ export default function Page() {
                 short videos — all running on your own laptop.
               </p>
               <div className='hero-actions' data-reveal>
-                <a className='btn btn-primary' href='#agents'>
-                  Explore the studio
+                <a className='btn btn-primary' href={REPO} {...ext}>
+                  Star us on GitHub
                   <span className='arrow'>{arrowOut}</span>
                 </a>
-                <a className='btn btn-ghost' href='#labs'>
-                  View skills
+                <a className='btn btn-ghost' href={REPO_RELEASES} {...ext}>
+                  Download desktop
                   <span className='arrow'>{arrowPlus}</span>
                 </a>
               </div>
@@ -231,7 +255,7 @@ export default function Page() {
                   <code className='code-inline'>pnpm tools-dev</code>, deploys
                   the web layer to Vercel, and stays BYOK at every layer.
                 </p>
-                <a className='btn btn-ghost' href='#agents'>
+                <a className='btn btn-ghost' href={REPO_DAEMON} {...ext}>
                   Read our approach
                   <span className='arrow'>{arrowOut}</span>
                 </a>
@@ -335,7 +359,12 @@ export default function Page() {
                       </code>{' '}
                       bundles. Drop a folder in, restart the daemon, it appears.
                     </p>
-                    <a className='arrow-mark' href='#'>
+                    <a
+                      className='arrow-mark'
+                      href={REPO_SKILLS}
+                      aria-label='Browse all skills on GitHub'
+                      {...ext}
+                    >
                       {arrowOut}
                     </a>
                   </div>
@@ -367,7 +396,12 @@ export default function Page() {
                       </code>{' '}
                       systems — Linear, Vercel, Stripe, Apple, Cursor, Figma…
                     </p>
-                    <a className='arrow-mark' href='#'>
+                    <a
+                      className='arrow-mark'
+                      href={REPO_DESIGN_SYSTEMS}
+                      aria-label='Browse all design systems on GitHub'
+                      {...ext}
+                    >
                       {arrowOut}
                     </a>
                   </div>
@@ -395,7 +429,12 @@ export default function Page() {
                       Devin · Hermes · Pi · Kimi · Kiro · Qwen — auto-detected
                       on $PATH.
                     </p>
-                    <a className='arrow-mark' href='#'>
+                    <a
+                      className='arrow-mark'
+                      href={REPO_DAEMON}
+                      aria-label='Read the agent adapter source on GitHub'
+                      {...ext}
+                    >
                       {arrowOut}
                     </a>
                   </div>
@@ -422,7 +461,12 @@ export default function Page() {
                       OpenAI-compatible proxy. DeepSeek, Groq, OpenRouter, your
                       self-hosted vLLM — paste a baseUrl + key, ship.
                     </p>
-                    <a className='arrow-mark' href='#'>
+                    <a
+                      className='arrow-mark'
+                      href={REPO}
+                      aria-label='See BYOK setup on GitHub'
+                      {...ext}
+                    >
                       {arrowOut}
                     </a>
                   </div>
@@ -499,6 +543,7 @@ export default function Page() {
                     </>
                   ),
                   src: '/assets/lab-1.png',
+                  href: `${REPO_SKILLS}/guizang-ppt`,
                 },
                 {
                   badge: 'Media',
@@ -506,6 +551,7 @@ export default function Page() {
                   title: 'Synthetic Matter',
                   body: 'Gpt-image-2 + Seedance + HyperFrames. Image, video, audio — same chat surface as code.',
                   src: '/assets/lab-2.png',
+                  href: `${REPO_SKILLS}/hyperframes`,
                 },
                 {
                   badge: 'Loop',
@@ -513,6 +559,7 @@ export default function Page() {
                   title: 'Prompt Choreography',
                   body: 'The interactive question form pops before a single pixel is improvised. 30s of radios beats 30min of redirects.',
                   src: '/assets/lab-3.png',
+                  href: `${REPO_SKILLS}/design-brief`,
                 },
                 {
                   badge: 'Critique',
@@ -520,6 +567,7 @@ export default function Page() {
                   title: 'Visual Reasoning',
                   body: '5-dim self-critique gates every artifact: philosophy · hierarchy · execution · specificity · restraint.',
                   src: '/assets/lab-4.png',
+                  href: `${REPO_SKILLS}/critique`,
                 },
                 {
                   badge: 'Runtime',
@@ -527,6 +575,7 @@ export default function Page() {
                   title: 'Soft Systems',
                   body: 'Sandboxed iframe preview. Streaming todos. Real-cwd filesystem. Adaptive loops between human and machine.',
                   src: '/assets/lab-5.png',
+                  href: REPO_DAEMON,
                 },
               ].map((lab) => (
                 <div className='lab' key={lab.num} data-reveal>
@@ -541,7 +590,12 @@ export default function Page() {
                   </div>
                   <h4>{lab.title}</h4>
                   <p>{lab.body}</p>
-                  <a className='arrow-mark' href='#'>
+                  <a
+                    className='arrow-mark'
+                    href={lab.href}
+                    aria-label={`Open ${lab.title} on GitHub`}
+                    {...ext}
+                  >
                     {arrowOut}
                   </a>
                 </div>
@@ -560,9 +614,14 @@ export default function Page() {
               </div>
               <span className='meta'>
                 05 / 31 SKILLS{NBSP}·{NBSP}
-                <span style={{ color: 'var(--coral)' }}>
+                <a
+                  href={REPO_SKILLS}
+                  className='library-link'
+                  style={{ color: 'var(--coral)' }}
+                  {...ext}
+                >
                   VIEW FULL LIBRARY →
-                </span>
+                </a>
               </span>
             </div>
           </div>
@@ -643,7 +702,9 @@ export default function Page() {
                 <span>Skills inform everything. Files make it real.</span>
               </div>
               <div className='right'>
-                <b>github.com/nexu-io/open-design</b>
+                <a className='method-repo-link' href={REPO} {...ext}>
+                  <b>github.com/nexu-io/open-design</b>
+                </a>
                 {NBSP}·{NBSP}Apache-2.0
               </div>
             </div>
@@ -670,11 +731,16 @@ export default function Page() {
                   <em>artifacts</em>
                   <span className='dot'>.</span>
                 </h2>
-                <a className='work-link' href='#labs'>
+                <a className='work-link' href={REPO_SKILLS} {...ext}>
                   View all 31 skills
                 </a>
               </div>
-              <div className='work-card' data-reveal>
+              <a
+                className='work-card'
+                data-reveal
+                href={`${REPO_SKILLS}/guizang-ppt`}
+                {...ext}
+              >
                 <div className='label-row'>
                   <span className='small-label'>Featured skill</span>
                   <span className='index'>01 / 31</span>
@@ -692,8 +758,13 @@ export default function Page() {
                   <span className='year'>2026 · DECK</span>
                   <span>DEFAULT</span>
                 </div>
-              </div>
-              <div className='work-card alt' data-reveal>
+              </a>
+              <a
+                className='work-card alt'
+                data-reveal
+                href={`${REPO_SKILLS}/dating-web`}
+                {...ext}
+              >
                 <div className='label-row'>
                   <span className='small-label'>Companion</span>
                   <span className='index'>04 / 31</span>
@@ -711,7 +782,7 @@ export default function Page() {
                   <span className='year'>2026 · WEB</span>
                   <span>PROTOTYPE</span>
                 </div>
-              </div>
+              </a>
             </div>
             <div className='work-arrows'>
               <button type='button' className='nav-btn'>
@@ -778,7 +849,12 @@ export default function Page() {
                   culture.
                 </p>
                 <div className='partners'>
-                  <div className='partner' data-reveal>
+                  <a
+                    className='partner'
+                    data-reveal
+                    href={LINEAGE['huashu-design']}
+                    {...ext}
+                  >
                     <div className='glyph'>
                       <svg
                         viewBox='0 0 80 30'
@@ -791,8 +867,13 @@ export default function Page() {
                     </div>
                     <span>huashu-design</span>
                     <small>Philosophy</small>
-                  </div>
-                  <div className='partner' data-reveal>
+                  </a>
+                  <a
+                    className='partner'
+                    data-reveal
+                    href={LINEAGE['guizang-ppt']}
+                    {...ext}
+                  >
                     <div className='glyph'>
                       <svg
                         viewBox='0 0 80 30'
@@ -805,8 +886,13 @@ export default function Page() {
                     </div>
                     <span>guizang-ppt</span>
                     <small>Decks</small>
-                  </div>
-                  <div className='partner' data-reveal>
+                  </a>
+                  <a
+                    className='partner'
+                    data-reveal
+                    href={LINEAGE['multica-ai']}
+                    {...ext}
+                  >
                     <div className='glyph'>
                       <svg
                         viewBox='0 0 80 30'
@@ -822,8 +908,13 @@ export default function Page() {
                     </div>
                     <span>multica-ai</span>
                     <small>Daemon</small>
-                  </div>
-                  <div className='partner' data-reveal>
+                  </a>
+                  <a
+                    className='partner'
+                    data-reveal
+                    href={LINEAGE['open-codesign']}
+                    {...ext}
+                  >
                     <div className='glyph'>
                       <svg
                         viewBox='0 0 80 30'
@@ -837,8 +928,13 @@ export default function Page() {
                     </div>
                     <span>open-codesign</span>
                     <small>UX</small>
-                  </div>
-                  <div className='partner' data-reveal>
+                  </a>
+                  <a
+                    className='partner'
+                    data-reveal
+                    href={LINEAGE['claude-code']}
+                    {...ext}
+                  >
                     <div className='glyph'>
                       <svg
                         viewBox='0 0 80 30'
@@ -851,9 +947,9 @@ export default function Page() {
                     </div>
                     <span>Claude Code</span>
                     <small>Skills.md</small>
-                  </div>
+                  </a>
                 </div>
-                <a className='read-more' href='#'>
+                <a className='read-more' href={REPO} {...ext}>
                   Read more stories
                 </a>
               </div>
@@ -892,15 +988,12 @@ export default function Page() {
                   Three commands and the loop is yours.
                 </p>
                 <div className='cta-actions'>
-                  <a
-                    className='btn btn-primary'
-                    href='https://github.com/nexu-io/open-design'
-                  >
+                  <a className='btn btn-primary' href={REPO} {...ext}>
                     Star on GitHub
                     <span className='arrow'>{arrowOut}</span>
                   </a>
-                  <a className='email-pill' href='mailto:hello@open-design.dev'>
-                    hello@open-design.dev
+                  <a className='email-pill' href={REPO_ISSUES} {...ext}>
+                    Open an issue
                     <span className='arrow-circle'>→</span>
                   </a>
                 </div>
@@ -935,8 +1028,39 @@ export default function Page() {
                 </a>
                 <p style={{ marginTop: 18 }}>
                   The open-source alternative to Claude Design. Built on the
-                  shoulders of huashu-design, guizang-ppt, multica-ai, and
-                  open-codesign.
+                  shoulders of{' '}
+                  <a
+                    className='inline-link'
+                    href={LINEAGE['huashu-design']}
+                    {...ext}
+                  >
+                    huashu-design
+                  </a>
+                  ,{' '}
+                  <a
+                    className='inline-link'
+                    href={LINEAGE['guizang-ppt']}
+                    {...ext}
+                  >
+                    guizang-ppt
+                  </a>
+                  ,{' '}
+                  <a
+                    className='inline-link'
+                    href={LINEAGE['multica-ai']}
+                    {...ext}
+                  >
+                    multica-ai
+                  </a>
+                  , and{' '}
+                  <a
+                    className='inline-link'
+                    href={LINEAGE['open-codesign']}
+                    {...ext}
+                  >
+                    open-codesign
+                  </a>
+                  .
                 </p>
               </div>
               <div className='foot-col'>
@@ -949,10 +1073,14 @@ export default function Page() {
                     <a href='#labs'>Labs</a>
                   </li>
                   <li>
-                    <a href='#'>Method</a>
+                    <a href={REPO_DAEMON} {...ext}>
+                      Method
+                    </a>
                   </li>
                   <li>
-                    <a href='#'>Manifesto</a>
+                    <a href={REPO} {...ext}>
+                      Manifesto
+                    </a>
                   </li>
                 </ul>
               </div>
@@ -960,16 +1088,24 @@ export default function Page() {
                 <h5>Library</h5>
                 <ul>
                   <li>
-                    <a href='#'>31 Skills</a>
+                    <a href={REPO_SKILLS} {...ext}>
+                      31 Skills
+                    </a>
                   </li>
                   <li>
-                    <a href='#'>72 Systems</a>
+                    <a href={REPO_DESIGN_SYSTEMS} {...ext}>
+                      72 Systems
+                    </a>
                   </li>
                   <li>
-                    <a href='#'>5 Directions</a>
+                    <a href={REPO_DESIGN_SYSTEMS} {...ext}>
+                      5 Directions
+                    </a>
                   </li>
                   <li>
-                    <a href='#'>5 Frames</a>
+                    <a href={`${REPO_SKILLS}/hyperframes`} {...ext}>
+                      5 Frames
+                    </a>
                   </li>
                 </ul>
               </div>
@@ -977,16 +1113,24 @@ export default function Page() {
                 <h5>Connect</h5>
                 <ul>
                   <li>
-                    <a href='https://github.com/nexu-io/open-design'>GitHub</a>
+                    <a href={REPO} {...ext}>
+                      GitHub
+                    </a>
                   </li>
                   <li>
-                    <a href='#'>X / Twitter</a>
+                    <a href={REPO_ISSUES} {...ext}>
+                      Issues
+                    </a>
                   </li>
                   <li>
-                    <a href='#'>Discord</a>
+                    <a href={REPO_CONTRIBUTORS} {...ext}>
+                      Contributors
+                    </a>
                   </li>
                   <li>
-                    <a href='#'>RSS</a>
+                    <a href={REPO_RELEASES} {...ext}>
+                      Releases
+                    </a>
                   </li>
                 </ul>
               </div>
@@ -994,16 +1138,24 @@ export default function Page() {
                 <h5>Docs</h5>
                 <ul>
                   <li>
-                    <a href='#'>Quickstart</a>
+                    <a href={REPO_DOCS('QUICKSTART.md')} {...ext}>
+                      Quickstart
+                    </a>
                   </li>
                   <li>
-                    <a href='#'>Architecture</a>
+                    <a href={REPO_DOCS('docs/architecture.md')} {...ext}>
+                      Architecture
+                    </a>
                   </li>
                   <li>
-                    <a href='#'>Skill Protocol</a>
+                    <a href={REPO_DOCS('docs/skills-protocol.md')} {...ext}>
+                      Skill Protocol
+                    </a>
                   </li>
                   <li>
-                    <a href='#'>Roadmap</a>
+                    <a href={REPO_DOCS('docs/roadmap.md')} {...ext}>
+                      Roadmap
+                    </a>
                   </li>
                 </ul>
               </div>
